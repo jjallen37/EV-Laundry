@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--
+Modified from this example
+http://demos.jquerymobile.com/1.4.4/theme-default/
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EV Laundry - Sorting</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="js/sorting.js"></script>
+
+    <style>
+        .noshadow * {
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div data-role="page" id="testpage">
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>Washing and Drying</h1>
+        <a href="login.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
+        <div data-role="navbar">
+            <ul>
+                <li><a href="sorting.html">Sorting</a></li>
+                <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Washing and Drying</a></li>
+                <!--<li><a href="drying.html">Drying</a></li>-->
+                <li><a href="folding.html">Folding</a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+        <!-- Washers -->
+        <h3 style="text-align: center;">Washers</h3>
+        <div class="ui-grid-c">
+            <div id="washer-1" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">
+                Washer 1<hr>
+                Claire Customer <br>
+                <br>
+                <span style="float: right;font-size: smaller">20m 37s remaining...</span>
+            </div></div>
+            <div id="washer-2" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+                Washer 2<hr>
+                Greg Granville <br>
+                <br>
+                <span style="float: right;font-size: smaller;color: green">Completed at 10:12 AM</span>
+            </div></div>
+            <div id="washer-3" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+                Washer 3<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="washer-4" class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:100px">
+                Washer 4<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+        </div><!-- /grid-c -->
+
+        <br>
+
+        <h3 style="text-align: center;">Dryers</h3>
+        <!-- Dryers -->
+        <div class="ui-grid-b">
+            <div id="dryer-1" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 1<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="dryer-2" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 2<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="dryer-3" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 4<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="dryer-4" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 4<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="dryer-5" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 5<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+            <div id="dryer-6" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+                Dryer 6<hr>
+                <br>
+                <br>
+                <span style="float: right;font-size: smaller">Empty</span>
+            </div></div>
+        </div><!-- /grid-c -->
+
+
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

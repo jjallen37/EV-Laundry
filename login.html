@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+Modified from this example
+http://demos.jquerymobile.com/1.4.4/theme-default/
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EV Laundry - Employee Login</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="js/login.js"></script>
+
+    <style>
+        .noshadow * {
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div data-role="page" id="testpage">
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>EV Laundry Emplyee Login</h1>
+    </div><!-- /header -->
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+
+        <form>
+            <!-- Select Employee Name -->
+            <div class="ui-field-contain">
+                <label for="select-custom-1" class="select">Employee Name:</label>
+                <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
+                    <option value="1">Earl Extraordinary</option>
+                    <option value="2">Vince Ventures</option>
+                    <option value="3">Employee 3</option>
+                </select>
+            </div>
+
+            <!-- Select Employee Task -->
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup">
+                    <legend>Task:</legend>
+                    <input type="radio" name="radio-v-1" id="radio-v-1a">
+                    <label for="radio-v-1a">Sorting</label>
+                    <input type="radio" name="radio-v-1" id="radio-v-1b">
+                    <label for="radio-v-1b">Washing</label>
+                    <input type="radio" name="radio-v-1" id="radio-v-1c">
+                    <label for="radio-v-1c">Drying</label>
+                    <input type="radio" name="radio-v-1" id="radio-v-1d">
+                    <label for="radio-v-1d">Sorting</label>
+                </fieldset>
+            </div>
+
+            <!-- Login Button -->
+            <input type="submit" id="login-submit-btn" value="Login">
+        </form>
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+    <!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

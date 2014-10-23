@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+Modified from this example
+http://demos.jquerymobile.com/1.4.4/theme-default/
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EV Laundry - Folding</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="js/folding.js"></script>
+
+    <style>
+        .noshadow * {
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div data-role="page" id="testpage">
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>Folding</h1>
+        <a href="login.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
+        <div data-role="navbar">
+            <ul>
+                <li><a href="sorting.html">Sorting</a></li>
+                <li><a href="washing.html">Washing and Drying</a></li>
+                <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Folding</a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+
+        <form id="folding-form">
+            <!-- Select Customer Name -->
+            <div class="ui-field-contain">
+                <label for="select-customer-name-fold" class="select">Employee Name:</label>
+                <select name="select-customer-name-fold" id="select-customer-name-fold" data-native-menu="false">
+                    <option value="1">Claire Customer</option>
+                    <option value="2">Sarah Sorority</option>
+                    <option value="3">Greg Granville</option>
+                </select>
+            </div>
+
+            <!-- Time Started -->
+            <div class="ui-field-contain">
+                <label for="time-ended">End Time:</label>
+                <input type="time" data-clear-btn="false" name="time-ended" id="time-ended" value="">
+            </div>
+
+            <br> <!-- Break up the form -->
+
+            <!-- Laundry Counts -->
+            <div class="ui-field-contain">
+                <label for="slider-tops-fold">Tops:</label>
+                <input type="range" name="slider-tops-fold" id="slider-tops-fold" value="0" min="0" max="100" data-highlight="true">
+            </div>
+            <div class="ui-field-contain">
+                <label for="slider-bottoms-fold">Bottoms:</label>
+                <input type="range" name="slider-bottoms-fold" id="slider-bottoms-fold" value="0" min="0" max="100" data-highlight="true">
+            </div>
+            <div class="ui-field-contain">
+                <label for="slider-socks-fold">Socks:</label>
+                <input type="range" name="slider-socks-fold" id="slider-socks-fold" value="0" min="0" max="100" data-highlight="true">
+            </div>
+            <div class="ui-field-contain">
+                <label for="slider-towels-fold">Towels/Other:</label>
+                <input type="range" name="slider-towels-fold" id="slider-towels-fold" value="0" min="0" max="100" data-highlight="true">
+            </div>
+
+            <br> <!-- Break up the form -->
+
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="folded-stacked" name="folded-stacked">Items folded & neatly stacked?
+                </label>
+            </div>
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="inventory_accurate_fold" name="inventory_accurate_fold">Inventory accurate?
+                </label>
+            </div>
+
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="folding-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
