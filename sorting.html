@@ -25,7 +25,8 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     </style>
 </head>
 <body>
-<div data-role="page" id="testpage">
+
+<div data-role="page" id="new_sort">
 
     <!-- Header and Navigation Bar -->
     <div data-role="header">
@@ -35,7 +36,7 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <div data-role="navbar">
             <ul>
                 <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Sorting</a></li>
-                <li><a href="washing.html">Washing and Drying</a></li>
+                <li><a href="laundry.html">Washing and Drying</a></li>
                 <li><a href="folding.html">Folding</a></li>
             </ul>
         </div>
@@ -43,7 +44,6 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-
         <form id="sorting-form">
             <!-- Select Customer Name -->
             <div class="ui-field-contain">
@@ -63,23 +63,59 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
 
             <br> <!-- Break up the form -->
 
-            <!-- Laundry Counts -->
-            <div class="ui-field-contain">
-                <label for="slider-tops-sort">Tops:</label>
-                <input type="range" name="slider-tops-sort" id="slider-tops-sort" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-bottoms-sort">Bottoms:</label>
-                <input type="range" name="slider-bottoms-sort" id="slider-bottoms-sort" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-socks-sort">Socks:</label>
-                <input type="range" name="slider-socks-sort" id="slider-socks-sort" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-towels-sort">Towels/Other:</label>
-                <input type="range" name="slider-towels-sort" id="slider-towels-sort" value="0" min="0" max="100" data-highlight="true">
-            </div>
+            <p><a href="#count_page" class="ui-btn ui-shadow ui-corner-all">Show page "two"</a></p>
+        </form>  <!-- /form -->
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+
+</div><!-- /page -->
+
+<div data-role="page" id="count_page">
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>Sorting</h1>
+        <a href="#new_sort" data-direction="reverse" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>
+
+    </div><!-- /header -->
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+        <form id="sorting-form">
+            <!-- Tops -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div style="text-align: center;">
+                        <h4>Tops</h4>
+                        <img src="images/tops.png" alt="Tops Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-tops-sort" id="slider-tops-sort" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-b">
+                    <div style="text-align: center;">
+                        <h4>Bottoms</h4>
+                        <img src="images/bottoms.png" alt="Bottoms Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-tops-sort" id="slider-bottoms-sort" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-c">
+                    <div style="text-align: center;">
+                        <h4>Socks</h4>
+                        <img src="images/socks.png" alt="Socks Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-tops-sort" id="slider-socks-sort" value="0" min="0" max="100" data-highlight="true">
+                </div>
+                <div class="ui-block-d">
+                    <div style="text-align: center;">
+                        <h4>Towels/Other</h4>
+                        <img src="images/towel.png" alt="Towels/Other Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-tops-sort" id="slider-towels-sort" value="0" min="0" max="10" data-highlight="true">
+                </div>
+            </div><!-- /grid-c -->
 
             <br> <!-- Break up the form -->
 
@@ -101,12 +137,7 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
             </div>
         </form>  <!-- /form -->
     </div><!-- /content -->
-
-    <!-- Footer -->
-    <div data-role="footer" data-position="fixed">
-    </div>
-
-</div><!-- /page -->
+</div>
 
 </body>
 </html>
