@@ -25,19 +25,20 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     </style>
 </head>
 <body>
-<div data-role="page" id="testpage">
+
+<div data-role="page" id="washer_page">
 
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Washing and Drying</h1>
-        <a href="login.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>
-                <li><a href="sorting.html">Sorting</a></li>
-                <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Washing and Drying</a></li>
+                <li><a href="sorting.html" data-ajax="false">Sorting</a></li>
+                <li><a href="#" data-ajax="false" class="ui-link ui-btn ui-btn-active ui-state-persist">Washing and Drying</a></li>
                 <!--<li><a href="drying.html">Drying</a></li>-->
-                <li><a href="folding.html">Folding</a></li>
+                <li><a href="folding.html" data-ajax="false">Folding</a></li>
             </ul>
         </div>
     </div><!-- /header -->
@@ -48,29 +49,25 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <!-- Washers -->
         <h3 style="text-align: center;">Washers</h3>
         <div class="ui-grid-c">
-            <div class="ui-block-a"><div id="washer-1" class="ui-bar ui-bar-a washer" style="height:100px">
+            <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:110px">
                 Washer 1<hr>
-                Claire Customer <br>
-                <br>
-                <span style="float: right;font-size: smaller">20m 37s remaining...</span>
+                <a href="#busy_wash_dialog" id="washer-1-btn">Card 4</a>
+                <span style="float: right;font-size: smaller">Started at 9:37 AM</span>
             </div></div>
-            <div class="ui-block-b washer"><div id="washer-2" class="ui-bar ui-bar-a washer" style="height:100px">
+            <div class="ui-block-b"><div id="washer-2" class="ui-bar ui-bar-a" style="height:110px">
                 Washer 2<hr>
-                Greg Granville <br>
-                <br>
+                <a href="#busy_wash_dialog" id="washer-2-btn">Card 2</a>
                 <span style="float: right;font-size: smaller;color: green">Completed at 10:12 AM</span>
             </div></div>
-            <div class="ui-block-c washer"><div id="washer-3" class="ui-bar ui-bar-a washer" style="height:100px">
+            <div class="ui-block-c"><div id="washer-3" class="ui-bar ui-bar-a" style="height:110px">
                 Washer 3<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#empty_wash_dialog" id="washer-3-btn" class="washer">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
             </div></div>
-            <div class="ui-block-d"><div id="washer-4" class="ui-bar ui-bar-a washer" style="height:100px">
+            <div class="ui-block-d"><div id="washer-4" class="ui-bar ui-bar-a" style="height:110px">
                 Washer 4<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#empty_wash_dialog" id="washer-4-btn" class="washer">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
             </div></div>
         </div><!-- /grid-c -->
 
@@ -79,41 +76,35 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <h3 style="text-align: center;">Dryers</h3>
         <!-- Dryers -->
         <div class="ui-grid-b">
-            <div id="dryer-1" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">
+            <div id="dryer-1" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 1<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#unload_dryer_dialog" id="dryer-1-btn">Card 4</a>
+                <span style="float: right;font-size: smaller">Started at 9:42 AM</span>
             </div></div>
-            <div id="dryer-2" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+            <div id="dryer-2" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 2<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#unload_dryer_dialog" id="dryer-2-btn">Card 8</a>
+                <span style="float: right;font-size: smaller">Done</span>
             </div></div>
-            <div id="dryer-3" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+            <div id="dryer-3" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:110px">
+                Dryer 3<hr>
+                <a href="#emptyDialog" id="dryer-3-btn">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
+            </div></div>
+            <div id="dryer-4" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 4<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#emptyDialog" id="dryer-4-btn">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
             </div></div>
-            <div id="dryer-4" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:100px">
-                Dryer 4<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
-            </div></div>
-            <div id="dryer-5" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:100px">
+            <div id="dryer-5" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 5<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#emptyDialog" id="dryer-5-btn">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
             </div></div>
-            <div id="dryer-6" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:100px">
+            <div id="dryer-6" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 6<hr>
-                <br>
-                <br>
-                <span style="float: right;font-size: smaller">Empty</span>
+                <a href="#emptyDialog" id="dryer-6-btn">Empty</a>
+                <span style="float: right;font-size: smaller"></span>
             </div></div>
         </div><!-- /grid-c -->
 
@@ -126,5 +117,99 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
 
 </div><!-- /page -->
 
+
+
+<!-- Dialog for Loading Washer -->
+<div data-role="page" id="empty_wash_dialog" data-dialog="true">
+    <div data-role="header">
+        <h1>Start Wash</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <form id="start-wash-form">
+            <!-- Card associated -->
+            <div class="ui-field-contain">
+                <label for="slider-id-num-empty">ID Number:</label>
+                <input type="range" name="slider-id-num-empty" id="slider-id-num-empty" value="1" min="1" max="15" data-highlight="true">
+            </div>
+
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="washers_empty" name="washers_empty">Washers empty before loading (spin)?
+                </label>
+            </div>
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="correct_setting" name="correct_setting">Washers on correct setting?
+                </label>
+            </div>
+
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="empty-washer-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+    </div>
+</div>
+
+<!-- Dialog for Loading Dryer -->
+<div data-role="page" id="busy_wash_dialog" data-dialog="true">
+    <div data-role="header">
+        <h1>Finish Wash - Load Dryer</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <form id="end-wash-form">
+            <!-- Card associated -->
+            <div class="ui-field-contain">
+                <label for="slider-id-load-dryer">Move to Dryer:</label>
+                <input type="range" name="slider-id-load-dryer" id="slider-id-load-dryer" value="1" min="1" max="6" data-highlight="true">
+            </div>
+
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="items_out" name="items_out">All items out of washers (spin)?
+                </label>
+            </div>
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="dryer_correct_setting" name="dryer_correct_setting">Dryers on correct setting?
+                </label>
+            </div>
+
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="empty-dryer-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+    </div>
+</div>
+
+<!-- Dialog for Emptying Dryer -->
+<div data-role="page" id="unload_dryer_dialog" data-dialog="true">
+    <div data-role="header">
+        <h1>Unload Dryer</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <form id="unload-dryer-form">
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="items_dry" name="items_dry">ITEMS DRY?
+                </label>
+            </div>
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="dryers_empty" name="dryers_empty">Items over edge? Dryers empty?
+                </label>
+            </div>
+
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="unload-dryer-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+    </div>
+</div>
 </body>
 </html>

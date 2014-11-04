@@ -1,1 +1,4 @@
-What should the max values be?
+What should the max values be for sorting?
+How many orders would we expect at a given time?
+Explain the process for multiple loads.
+

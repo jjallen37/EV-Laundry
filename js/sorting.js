@@ -4,10 +4,14 @@
 
 $(document).ready(function() {
 
+    var time_started;
+    var time_finished;
+
     $("input[type=submit]").click(function(e) {
+        time_finished = Date.now();
+
         // Collect form data
         var name = $("#select-customer-name option:selected").text();
-        var time_started = $("#time-started").val();
         var num_tops = $("#slider-tops-sort").val();
         var num_bottoms = $("#slider-bottoms-sort").val();
         var num_socks = $("#slider-socks-sort").val();
@@ -16,13 +20,21 @@ $(document).ready(function() {
         // For now, just print it
         console.log("Sorting");
         console.log("Name:"+name);
-        console.log("Time Started:"+time_started);
         console.log("Tops:"+num_tops);
         console.log("Bottoms:"+num_bottoms);
         console.log("Socks:"+num_socks);
         console.log("Towels:"+num_towels);
 
+        alert("Time started:"+time_started);
+        alert("Time finished:"+time_finished);
+
         e.preventDefault();
     });
+
+    $("#start_sorting").click(function(e) {
+        $("#header-sort").text("Sorting - "+$("#slider-id-num").val());
+        time_started = Date.now();
+    });
+
 });
 

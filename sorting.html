@@ -31,20 +31,20 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Sorting</h1>
-        <a href="login.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>
-                <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Sorting</a></li>
-                <li><a href="laundry.html">Washing and Drying</a></li>
-                <li><a href="folding.html">Folding</a></li>
+                <li><a href="#"  data-ajax="false" class="ui-link ui-btn ui-btn-active ui-state-persist">Sorting</a></li>
+                <li><a href="laundry.html" data-ajax="false">Washing and Drying</a></li>
+                <li><a href="folding.html" data-ajax="false">Folding</a></li>
             </ul>
         </div>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-        <form id="sorting-form">
+        <form id="sorting-form-1">
             <!-- Select Customer Name -->
             <div class="ui-field-contain">
                 <label for="select-customer-name" class="select">Customer Name:</label>
@@ -55,15 +55,15 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
                 </select>
             </div>
 
-            <!-- Time Started -->
+            <!-- Card associated -->
             <div class="ui-field-contain">
-                <label for="time-started">Start Time:</label>
-                <input type="time" data-clear-btn="false" name="time-started" id="time-started" value="">
+                <label for="slider-id-num">ID Number:</label>
+                <input type="range" name="slider-id-num" id="slider-id-num" value="1" min="1" max="15" data-highlight="true">
             </div>
 
             <br> <!-- Break up the form -->
 
-            <p><a href="#count_page" class="ui-btn ui-shadow ui-corner-all">Show page "two"</a></p>
+            <p><a id="start_sorting" href="#sort_count_page" class="ui-btn ui-shadow ui-corner-all">Start Sorting</a></p>
         </form>  <!-- /form -->
     </div><!-- /content -->
 
@@ -73,13 +73,12 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
 
 </div><!-- /page -->
 
-<div data-role="page" id="count_page">
+<div data-role="page" id="sort_count_page">
 
     <!-- Header and Navigation Bar -->
     <div data-role="header">
-        <h1>Sorting</h1>
+        <h1 id="header-sort">Sorting</h1>
         <a href="#new_sort" data-direction="reverse" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>
-
     </div><!-- /header -->
 
     <!-- Main Page Content -->
@@ -87,28 +86,28 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <form id="sorting-form">
             <!-- Tops -->
             <div class="ui-grid-c">
-                <div class="ui-block-a">
+                <div class="ui-block-a" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Tops</h4>
                         <img src="images/tops.png" alt="Tops Image" style="width: 75%;">
                     </div>
                     <input type="range" name="slider-tops-sort" id="slider-tops-sort" value="0" min="0" max="50" data-highlight="true">
                 </div>
-                <div class="ui-block-b">
+                <div class="ui-block-b" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Bottoms</h4>
                         <img src="images/bottoms.png" alt="Bottoms Image" style="width: 75%;">
                     </div>
                     <input type="range" name="slider-tops-sort" id="slider-bottoms-sort" value="0" min="0" max="50" data-highlight="true">
                 </div>
-                <div class="ui-block-c">
+                <div class="ui-block-c" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Socks</h4>
                         <img src="images/socks.png" alt="Socks Image" style="width: 75%;">
                     </div>
                     <input type="range" name="slider-tops-sort" id="slider-socks-sort" value="0" min="0" max="100" data-highlight="true">
                 </div>
-                <div class="ui-block-d">
+                <div class="ui-block-d" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Towels/Other</h4>
                         <img src="images/towel.png" alt="Towels/Other Image" style="width: 75%;">

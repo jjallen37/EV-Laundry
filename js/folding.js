@@ -4,10 +4,13 @@
 
 $(document).ready(function() {
 
+    var time_started;
+    var time_finished;
+
     $("input[type=submit]").click(function(e) {
+        time_finished = Date.now();
         // Collect form data
         var name = $("#select-customer-name-fold option:selected").text();
-        var time_ended = $("#time-ended").val();
         var num_tops = $("#slider-tops-fold").val();
         var num_bottoms = $("#slider-bottoms-fold").val();
         var num_socks = $("#slider-socks-fold").val();
@@ -24,5 +27,23 @@ $(document).ready(function() {
 
         e.preventDefault();
     });
+
+    //$("#slider-tops-fold").on('change mousemove',function(){
+    //    var newMax = $(this).val();
+    //    resetSlider(newMax);
+    //});
+    //
+    //function resetSlider(maxPrice){
+    //    $("#slider-tops-hung").attr('value',maxPrice);
+    //    $("input[type='range']").slider( "refresh" );//refresh slider to max value
+    //    $(".ui-slider-handle").css("left","100%");
+    //    console.log("Slider Reset Done.");
+    //}
+
+    $("#start_folding").click(function(e) {
+        $("#header-fold").text("Folding - "+$("#slider-id-num").val());
+        time_started = Date.now();
+    });
+    console.log("page ready");
 });
 

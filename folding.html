@@ -25,73 +25,115 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     </style>
 </head>
 <body>
-<div data-role="page" id="testpage">
+
+<div data-role="page" id="new_fold">
 
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Folding</h1>
-        <a href="login.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>
-                <li><a href="sorting.html">Sorting</a></li>
-                <li><a href="laundry.html">Washing and Drying</a></li>
-                <li><a href="#" class="ui-link ui-btn ui-btn-active ui-state-persist">Folding</a></li>
+                <li><a href="sorting.html" data-ajax="false">Sorting</a></li>
+                <li><a href="laundry.html" data-ajax="false">Washing and Drying</a></li>
+                <li><a href="#" data-ajax="false" class="ui-link ui-btn ui-btn-active ui-state-persist">Folding</a></li>
             </ul>
         </div>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-
-        <form id="folding-form">
-            <!-- Select Customer Name -->
+        <form id="folding-form-1">
+            <!-- Card associated -->
             <div class="ui-field-contain">
-                <label for="select-customer-name-fold" class="select">Employee Name:</label>
-                <select name="select-customer-name-fold" id="select-customer-name-fold" data-native-menu="false">
-                    <option value="1">Claire Customer</option>
-                    <option value="2">Sarah Sorority</option>
-                    <option value="3">Greg Granville</option>
-                </select>
-            </div>
-
-            <!-- Time Started -->
-            <div class="ui-field-contain">
-                <label for="time-ended">End Time:</label>
-                <input type="time" data-clear-btn="false" name="time-ended" id="time-ended" value="">
+                <label for="slider-id-num">ID Number:</label>
+                <input type="range" name="slider-id-num" id="slider-id-num" value="1" min="1" max="15" data-highlight="true">
             </div>
 
             <br> <!-- Break up the form -->
 
-            <!-- Laundry Counts -->
-            <div class="ui-field-contain">
-                <label for="slider-tops-fold">Tops:</label>
-                <input type="range" name="slider-tops-fold" id="slider-tops-fold" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-bottoms-fold">Bottoms:</label>
-                <input type="range" name="slider-bottoms-fold" id="slider-bottoms-fold" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-socks-fold">Socks:</label>
-                <input type="range" name="slider-socks-fold" id="slider-socks-fold" value="0" min="0" max="100" data-highlight="true">
-            </div>
-            <div class="ui-field-contain">
-                <label for="slider-towels-fold">Towels/Other:</label>
-                <input type="range" name="slider-towels-fold" id="slider-towels-fold" value="0" min="0" max="100" data-highlight="true">
-            </div>
+            <p><a id="start_folding" href="#fold_count_page" class="ui-btn ui-shadow ui-corner-all">Start Folding</a></p>
+        </form>  <!-- /form -->
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+
+</div><!-- /page -->
+
+<div data-role="page" id="fold_count_page">
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1 id="header-fold">Folding</h1>
+        <a href="#new_fold" data-direction="reverse" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>
+    </div><!-- /header -->
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+        <form id="folding-form">
+            <!-- Tops -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Tops</h4>
+                        <img src="images/tops.png" alt="Tops Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-tops-fold" id="slider-tops-fold" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-b" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Bottoms</h4>
+                        <img src="images/bottoms.png" alt="Bottoms Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-bottoms-fold" id="slider-bottoms-fold" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-c" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Socks</h4>
+                        <img src="images/socks.png" alt="Socks Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-socks-fold" id="slider-socks-fold" value="0" min="0" max="100" data-highlight="true">
+                </div>
+                <div class="ui-block-d" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Towels/Other</h4>
+                        <img src="images/towel.png" alt="Towels/Other Image" style="width: 75%;">
+                    </div>
+                    <input type="range" name="slider-towels-fold" id="slider-towels-fold" value="0" min="0" max="10" data-highlight="true">
+                </div>
+            </div><!-- /grid-c -->
+            <!-- Tops -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Hung</h4>
+                    </div>
+                    <input type="range" name="slider-tops-hung" id="slider-tops-hung" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-b" style="padding-right: 5px;">
+                    <div style="text-align: center;">
+                        <h4>Hung</h4>
+                    </div>
+                    <input type="range" name="slider-bottoms-hung" id="slider-bottoms-hung" value="0" min="0" max="50" data-highlight="true">
+                </div>
+                <div class="ui-block-c" style="padding-right: 5px;"></div>
+                <div class="ui-block-d" style="padding-right: 5px;"></div>
+            </div><!-- /grid-c -->
 
             <br> <!-- Break up the form -->
 
             <!-- Job Coach QA Checklist -->
             <div class="ui-field-contain">
                 <label>
-                    <input type="checkbox" id="folded-stacked" name="folded-stacked">Items folded & neatly stacked?
+                    <input type="checkbox" id="neatly_stacked" name="neatly_stacked">Items folded & neatly stacked?
                 </label>
             </div>
             <div class="ui-field-contain">
                 <label>
-                    <input type="checkbox" id="inventory_accurate_fold" name="inventory_accurate_fold">Inventory accurate?
+                    <input type="checkbox" id="inventory_accurate" name="inventory_accurate">Inventory Accurate?
                 </label>
             </div>
 
@@ -101,12 +143,7 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
             </div>
         </form>  <!-- /form -->
     </div><!-- /content -->
-
-    <!-- Footer -->
-    <div data-role="footer" data-position="fixed">
-    </div>
-
-</div><!-- /page -->
+</div>
 
 </body>
 </html>
