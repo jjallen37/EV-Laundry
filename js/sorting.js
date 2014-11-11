@@ -25,15 +25,28 @@ $(document).ready(function() {
         console.log("Socks:"+num_socks);
         console.log("Towels:"+num_towels);
 
+
         alert("Time started:"+time_started);
         alert("Time finished:"+time_finished);
 
         e.preventDefault();
+
     });
 
     $("#start_sorting").click(function(e) {
         $("#header-sort").text("Sorting - "+$("#slider-id-num").val());
         time_started = Date.now();
+
+        $.ajax(url_base + "/laundry.php/",
+            {type: "POST",
+                dataType: "json",
+                data: $(this).serialize(),
+                success: function(review_json, status, jqXHR) {
+                    window.location.href = "http://wwwx.cs.unc.edu/Courses/comp426-f13/jamesml/site/bathroomview.php?bid="+bid;
+                },
+                error: function(jqXHR, status, error) {
+                    // alert("faliure:"+jqXHR.responseText);
+                }});
     });
 
 });
