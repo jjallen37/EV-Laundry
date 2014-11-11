@@ -48,16 +48,38 @@ class Laundry
         $this->color = $color;
     }
 
+    public static function findByID($lid) {
+        // Create (connect to) SQLite database in file
+        $db = new PDO('sqlite:../db/ev_db.db');
+        // Set errormode to exceptions
+        $db->setAttribute(PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $db->prepare('SELECT * FROM Laundry WHERE lid == :lid');
+        $stmt->bindParam(':lid', $lid);
+        $stmt->execute();
+
+        $row = $stmt->fetch();
+        if (!empty($row)){
+            $laundry = new Laundry($row['lid'],
+                                $row['cid'],
+                                $row['color']);
+            return $laundry;
+        }
+        return null;
+    }
+
     public static function getAllIDs(){
-        $mysqli = new mysqli("classroom.cs.unc.edu", "jjallen", "classroomjja", "jjallendb");
+        // Create (connect to) SQLite database in file
+        $db = new PDO('sqlite:../db/ev_db.db');
+        // Set errormode to exceptions
+        $db->setAttribute(PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION);
 
-        $result = $mysqli->query("SELECT rid FROM Review");
+        $result = $db->query('SELECT lid FROM Laundry');
         $id_array = array();
-
-        if($result){
-            while($next_row = $result->fetch_array()) {
-                $id_array[] = intval($next_row['rid']);
-            }
+        foreach ($result as $r){
+            $id_array[] = intval($r['cid']);
         }
         return $id_array;
     }
