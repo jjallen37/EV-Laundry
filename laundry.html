@@ -31,7 +31,19 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Washing and Drying</h1>
-        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" id="user_button_2" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <script>
+            if(typeof(Storage) !== "undefined") {
+                if (sessionStorage.eid) {
+                    $("#user_button_2").html(sessionStorage.username);
+                } else {
+                    window.location.href = "login.html";
+                }
+            } else {
+                $("#user_button_2").html("LOGIN DISABLED");
+            }
+        </script>
+
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>

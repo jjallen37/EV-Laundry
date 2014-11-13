@@ -6,7 +6,54 @@ $(document).ready(function() {
 
     var time_started;
     var time_finished;
+    var lid;
+    var eid = 2; //TEMP
+    var url_base = "php";
 
+    /*
+        Load Customer and Color Data
+     */
+
+    $.ajax(url_base + "/color.php/",
+        {
+            type: "GET",
+            async: false,
+            success: function(color_json, status, jqXHR) {
+                var colors = color_json['colors'];
+                var lids = color_json['lids'];
+                var first = -1;
+
+                // Fill color chooser with available colors
+                for (var i=0; i < colors.length; i++){
+                    // Unassigned color
+                    if (lids[i] <= 0){
+                        var option = '<option value="'+(i+1)+'">'+colors[i]+'</option>';
+                        $("#select-color-sort").append(option);
+                        if (first == -1){
+                            first = i+1;
+                        }
+                    }
+                }
+
+                // Select first option by default
+                if (first != -1){
+                    $('option[value='+first+']').attr('selected', 'selected');
+                } else {
+                    var option = '<option value="'+(-1)+'">No available options</option>';
+                    $("#select-color-sort").append(option);
+                    $('option[value='+(-1)+']').attr('selected', 'selected');
+                }
+                // Redraw the select element
+                $("#select-color-sort").selectmenu('refresh');
+                return;
+            },
+            error: function(jqXHR, status, error) {
+                console.log("failure:"+jqXHR.responseText);
+                return;
+            }});
+
+
+    // Handle form submit
     $("input[type=submit]").click(function(e) {
         time_finished = Date.now();
 
@@ -17,35 +64,64 @@ $(document).ready(function() {
         var num_socks = $("#slider-socks-sort").val();
         var num_towels = $("#slider-towels-sort").val();
 
-        // For now, just print it
-        console.log("Sorting");
-        console.log("Name:"+name);
-        console.log("Tops:"+num_tops);
-        console.log("Bottoms:"+num_bottoms);
-        console.log("Socks:"+num_socks);
-        console.log("Towels:"+num_towels);
 
 
-        alert("Time started:"+time_started);
-        alert("Time finished:"+time_finished);
+        var json_str = '{ ' +
+        '"lid":'+lid + ',' +
+        '"eid":'+eid + ',' +
+        '"tops":'+num_tops + ',' +
+        '"bottoms" :'+num_bottoms + ',' +
+        '"socks":'+num_socks + ',' +
+        '"other":'+num_towels + "}";
+        console.log(json_str);
 
-        e.preventDefault();
+        var obj = JSON.parse(json_str);
 
-    });
-
-    $("#start_sorting").click(function(e) {
-        $("#header-sort").text("Sorting - "+$("#slider-id-num").val());
-        time_started = Date.now();
-
-        $.ajax(url_base + "/laundry.php/",
+        $.ajax(url_base + "/sort.php/",
             {type: "POST",
+                async: false,
                 dataType: "json",
-                data: $(this).serialize(),
+                data: obj,
                 success: function(review_json, status, jqXHR) {
-                    window.location.href = "http://wwwx.cs.unc.edu/Courses/comp426-f13/jamesml/site/bathroomview.php?bid="+bid;
+                    window.location.href = "sorting.html";
                 },
                 error: function(jqXHR, status, error) {
-                    // alert("faliure:"+jqXHR.responseText);
+                    console.log("failure:"+jqXHR.responseText);
+                    console.log("status:"+status);
+                    console.log("error:"+error);
+                }});
+        e.preventDefault();
+    });
+
+    /*
+        Create Laundry and assign color
+     */
+    $("#start_sorting").click(function(e) {
+        $("#header-sort").text("Sorting - ");
+        time_started = Date.now();
+
+        $("#slider-id-num").val();
+        var json_str = '{ ' +
+                        '"color" : ' + $('#select-color-sort').val() + ',' +
+                        '"cid" : 1 }';
+        console.log(json_str);
+        var obj = JSON.parse(json_str);
+
+        // Insert request
+        $.ajax(url_base + "/laundry.php/",
+            {type: "POST",
+                async: false,
+                dataType: "json",
+                data: obj,
+                success: function(review_json, status, jqXHR) {
+                    lid = review_json['lid'];
+                    $("#header-sort").text("Sorting - "+review_json['lid']);
+                    return;
+                },
+                error: function(jqXHR, status, error) {
+                    console.log("failure:"+jqXHR.responseText);
+                    console.log(error);
+                    return;
                 }});
     });
 

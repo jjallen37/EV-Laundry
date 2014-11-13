@@ -34,10 +34,7 @@ class Laundry
         $new_id = $db->lastInsertId();
 
         if ($new_id > 0) {
-            echo ("Inserted. LID=" . $new_id . "<br>");
             return new Laundry($new_id, $cid, $color);
-        } else {
-            echo ("Laundry creation failed");
         }
         return null;
     }

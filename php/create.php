@@ -29,8 +29,9 @@ try {
     $db->exec("DROP TABLE IF EXISTS Customers");
     $db->exec("DROP TABLE IF EXISTS Employees");
     $db->exec("DROP TABLE IF EXISTS Laundry");
-    $db->exec("DROP TABLE IF EXISTS Sorting");
-    $db->exec("DROP TABLE IF EXISTS Folding");
+    $db->exec("DROP TABLE IF EXISTS Sort");
+    $db->exec("DROP TABLE IF EXISTS Fold");
+    $db->exec("DROP TABLE IF EXISTS Event");
     $db->exec("DROP TABLE IF EXISTS Color");
     echo("Previous Tables Dropped<br>");
 
@@ -48,18 +49,26 @@ try {
     $db->exec("CREATE TABLE IF NOT EXISTS Laundry (
                 lid INTEGER PRIMARY KEY,
                 cid INTEGER,
+                color INTEGER)");
+    $db->exec("CREATE TABLE IF NOT EXISTS Color (
+                colorID INTEGER PRIMARY KEY,
                 color TEXT,
-                startTime INTEGER,
-                endTime INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Sorting (
+                lid INTEGER)");
+    $db->exec("CREATE TABLE IF NOT EXISTS Event (
+                lid INTEGER,
+                event INTEGER,
+                id INTEGER,
+                evtTime INTEGER)");
+    $db->exec("CREATE TABLE IF NOT EXISTS Sort (
+                sid INTEGER PRIMARY KEY,
                 lid INTEGER,
                 eid INTEGER,
                 tops INTEGER,
                 bottoms INTEGER,
                 socks INTEGER,
-                other INTEGER,
-                sortTime INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Folding (
+                other INTEGER)");
+    $db->exec("CREATE TABLE IF NOT EXISTS Fold (
+                fid INTEGER PRIMARY KEY,
                 lid INTEGER,
                 eid INTEGER,
                 tops INTEGER,
@@ -69,16 +78,31 @@ try {
                 socks INTEGER,
                 other INTEGER,
                 foldTime INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Color (
-                color TEXT PRIMARY KEY,
-                lid INTEGER)");
     echo("Tables Created<br>");
 
 
     /**************************************
+     * Insert Available colors            *
+     **************************************/
+    // Employee test data
+    $colors = array('Red','Blue','Green','Orange');
+
+    // Prepare INSERT statement to SQLite3 file db
+    $insert = "INSERT INTO Color (color, lid)
+                VALUES (:color, 0)";
+    $stmt = $db->prepare($insert);
+    $stmt->bindParam(':color', $color);
+
+    // Add each of the colors
+    foreach ($colors as $c) {
+        $color = $c;
+        $stmt->execute();
+    }
+
+    /**************************************
      * Insert Employee Data                *
      **************************************/
-    // Array with some test data to insert to database
+    // Employee test data
     $employees = array(
         array('firstName' => 'Earl',
             'lastName' => 'Extraordinary'),
@@ -87,7 +111,6 @@ try {
         array('firstName' => 'Employee',
             'lastName' => 'Third')
     );
-
 
     // Prepare INSERT statement to SQLite3 file db
     $insert = "INSERT INTO Employees (firstName, lastName)

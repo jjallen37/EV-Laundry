@@ -31,7 +31,18 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Folding</h1>
-        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" id="user_button_3" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Undefined User</a>
+        <script>
+            if(typeof(Storage) !== "undefined") {
+                if (sessionStorage.eid) {
+                    $("#user_button_3").html(sessionStorage.username);
+                } else {
+                    window.location.href = "login.html";
+                }
+            } else {
+                $("#user_button_3").html("LOGIN DISABLED");
+            }
+        </script>
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>
@@ -47,8 +58,9 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <form id="folding-form-1">
             <!-- Card associated -->
             <div class="ui-field-contain">
-                <label for="slider-id-num">ID Number:</label>
-                <input type="range" name="slider-id-num" id="slider-id-num" value="1" min="1" max="15" data-highlight="true">
+                <label for="select-color-fold">Card Color:</label>
+                <select name="select-color-fold" id="select-color-fold">
+                </select>
             </div>
 
             <br> <!-- Break up the form -->

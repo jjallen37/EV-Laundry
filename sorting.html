@@ -9,11 +9,21 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EV Laundry - Sorting</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <!--<link rel="stylesheet" href="themes/Theme1.min.css"/>-->
+    <link rel="stylesheet" href="themes/Theme3.min.css"/>
     <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
     <script src="js/sorting.js"></script>
+    <script>
+        if(typeof(Storage) !== "undefined") {
+            if (!sessionStorage.username) {
+                window.location.href = "login.html";
+            }
+            console.log("User:"+sessionStorage.username);
+        } else {
+            alert("Sorry, your browser does not support web storage...");
+        }
+    </script>
 
     <style>
         .noshadow * {
@@ -33,7 +43,18 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1>Sorting</h1>
-        <a href="login.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <a href="login.html" id="user_button_1" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <script>
+            if(typeof(Storage) !== "undefined") {
+                if (sessionStorage.eid) {
+                    $("#user_button_1").html(sessionStorage.username);
+                } else {
+                    window.location.href = "login.html";
+                }
+            } else {
+                $("#user_button_1").html("LOGIN DISABLED");
+            }
+        </script>
         <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
         <div data-role="navbar">
             <ul>
@@ -59,15 +80,9 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
 
             <!-- Card associated -->
             <div class="ui-field-contain">
-                <label for="slider-id-num">Card Color:</label>
+                <label for="select-color-sort">Card Color:</label>
                 <!-- <input type="range" name="slider-id-num" id="slider-id-num" value="1" min="1" max="15" data-highlight="true"> -->
-                <select name="select-choice-1" id="select-choice-1">
-                    <option value="red">Red</option>
-                    <option value="orange">Orange</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="green">Green</option>
-                    <option value="blue">Blue</option>
-                    <option value="purple">Purple</option>
+                <select name="select-color-sort" id="select-color-sort">
                 </select>
             </div> 
 
@@ -88,7 +103,8 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <!-- Header and Navigation Bar -->
     <div data-role="header">
         <h1 id="header-sort">Sorting</h1>
-        <a href="#new_sort" data-direction="reverse" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>
+        <!--<a href="#new_sort" data-direction="reverse" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>-->
+        <a href="#new_sort" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Back?</a>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
@@ -108,21 +124,21 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
                         <h4>Bottoms</h4>
                         <img src="images/bottoms.png" alt="Bottoms Image" style="width: 75%;">
                     </div>
-                    <input type="range" name="slider-tops-sort" id="slider-bottoms-sort" value="0" min="0" max="50" data-highlight="true">
+                    <input type="range" name="slider-bottoms-sort" id="slider-bottoms-sort" value="0" min="0" max="50" data-highlight="true">
                 </div>
                 <div class="ui-block-c" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Socks</h4>
                         <img src="images/socks.png" alt="Socks Image" style="width: 75%;">
                     </div>
-                    <input type="range" name="slider-tops-sort" id="slider-socks-sort" value="0" min="0" max="100" data-highlight="true">
+                    <input type="range" name="slider-socks-sort" id="slider-socks-sort" value="0" min="0" max="100" data-highlight="true">
                 </div>
                 <div class="ui-block-d" style="padding-right: 5px;">
                     <div style="text-align: center;">
                         <h4>Towels/Other</h4>
                         <img src="images/towel.png" alt="Towels/Other Image" style="width: 75%;">
                     </div>
-                    <input type="range" name="slider-tops-sort" id="slider-towels-sort" value="0" min="0" max="10" data-highlight="true">
+                    <input type="range" name="slider-towels-sort" id="slider-towels-sort" value="0" min="0" max="10" data-highlight="true">
                 </div>
             </div><!-- /grid-c -->
 
