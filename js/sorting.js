@@ -7,6 +7,7 @@ $(document).ready(function() {
     var time_started;
     var time_finished;
     var lid;
+    var colorID;
     var eid = 2; //TEMP
     var url_base = "php";
 
@@ -65,9 +66,9 @@ $(document).ready(function() {
         var num_towels = $("#slider-towels-sort").val();
 
 
-
         var json_str = '{ ' +
-        '"lid":'+lid + ',' +
+        '"colorID":'+ colorID + ',' +
+        '"isFold":'+ 0 + ',' +
         '"eid":'+eid + ',' +
         '"tops":'+num_tops + ',' +
         '"bottoms" :'+num_bottoms + ',' +
@@ -77,12 +78,13 @@ $(document).ready(function() {
 
         var obj = JSON.parse(json_str);
 
-        $.ajax(url_base + "/sort.php/",
+        console.log("Clothes request");
+        $.ajax(url_base + "/clothes.php/",
             {type: "POST",
                 async: false,
                 dataType: "json",
                 data: obj,
-                success: function(review_json, status, jqXHR) {
+                success: function(clothes_json, status, jqXHR) {
                     window.location.href = "sorting.html";
                 },
                 error: function(jqXHR, status, error) {
@@ -100,6 +102,7 @@ $(document).ready(function() {
         $("#header-sort").text("Sorting - ");
         time_started = Date.now();
 
+        colorID = $('#select-color-sort').val();
         $("#slider-id-num").val();
         var json_str = '{ ' +
                         '"color" : ' + $('#select-color-sort').val() + ',' +
@@ -113,15 +116,13 @@ $(document).ready(function() {
                 async: false,
                 dataType: "json",
                 data: obj,
-                success: function(review_json, status, jqXHR) {
-                    lid = review_json['lid'];
-                    $("#header-sort").text("Sorting - "+review_json['lid']);
-                    return;
+                success: function(laundry_json, status, jqXHR) {
+                    lid = laundry_json['lid'];
+                    $("#header-sort").text("Sorting - "+laundry_json['lid']);
                 },
                 error: function(jqXHR, status, error) {
-                    console.log("failure:"+jqXHR.responseText);
+                    console.log("failure but why:"+jqXHR.responseText);
                     console.log(error);
-                    return;
                 }});
     });
 

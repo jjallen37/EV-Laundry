@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
 <?php
 /**
  * Created by PhpStorm.
@@ -17,29 +9,28 @@
 ini_set('display_errors', 'On');
 require_once('orm/Customer.php');
 
+$path_components = explode('/', $_SERVER['PATH_INFO']);
 
-// Report if failed
-if ($new_review == null) {
-//    header("HTTP/1.0 500 Server Error");
-//    print("Server couldn't create new review.");
-    echo("Server couldn't create new review.<br>");
-    exit();
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    // GET to /customers.php/<id>
+    // Return laundry with all components
+    if (count($path_components) >= 2 && $path_components[1] != "") {
+        $cid = intval($path_components[1]);
+        $customer = Customer::findByID($cid);
+        if ($customer == null) {
+            header("HTTP/1.0 400 Bad Request");
+            print("Bad CID");
+            exit();
+        }
+
+        //Generate JSON encoding of new Review
+        header("Content-type: application/json");
+        print($customer->getJSON());
+        exit();
+    }
 }
 
-//Generate JSON encoding of new Review
-//header("Content-type: application/json");
-//print($new_review->getJSON());
-
-//echo ("About to create Customer<br>");
-//// Create new Review via ORM
-//$new_review = Customer::create("James","Allen");
-//$allIDs = Customer::getAllIDs();
-//foreach ($allIDs as $id){
-//    $customer = Customer::findByID($id);
-//}
-
+header("HTTP/1.0 400 Bad Request");
+print("Did not understand URL");
 exit();
 ?>
-
-</body>
-</html>

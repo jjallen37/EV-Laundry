@@ -69,6 +69,7 @@ $(document).ready(function() {
 
         var json_str = '{ ' +
             '"colorID":'+colorID + ',' +
+            '"isFold":'+ 1 + ',' +
             '"eid":'+eid + ',' +
             '"tops":'+num_tops + ',' +
             '"bottoms":'+num_bottoms + ',' +
@@ -80,12 +81,13 @@ $(document).ready(function() {
         var obj = JSON.parse(json_str);
 
         var folding_json = null;
-        $.ajax(url_base + "/fold.php/",
+        $.ajax(url_base + "/clothes.php/",
             {type: "POST",
                 async: false,
                 dataType: "json",
                 data: obj,
                 success: function(fold_json, status, jqXHR) {
+                    console.log("Fold json received: " + fold_json);
                     folding_json = fold_json;
                 },
                 error: function(jqXHR, status, error) {
@@ -94,7 +96,8 @@ $(document).ready(function() {
                 }});
 
         if (folding_json != null){
-            $.ajax(url_base + "/sort.php/" + folding_json['lid'],
+
+            $.ajax(url_base + "/clothes.php/" + folding_json['lid'],
                 {type: "GET",
                     async: false,
                     success: function(sort_json, status, jqXHR) {
@@ -116,7 +119,7 @@ $(document).ready(function() {
                         console.log("error:"+error);
                     }});
         }
-        //window.location.href = "folding.html";
+        window.location.href = "folding.html";
     });
 
     $("#start_folding").click(function(e) {

@@ -7,12 +7,17 @@
  */
 
 ini_set('display_errors', 'On');
+require_once('orm/Clothes.php');
+require_once('orm/Customer.php');
 
 class Laundry
 {
     private $lid;
     private $cid;
     private $color;
+    private $sort;
+    private $fold;
+    private $wash_dry;
 
     public static function create($cid, $color) {
         // Create (connect to) SQLite database in file
@@ -90,12 +95,29 @@ class Laundry
     public function getColor() {
         return $this->color;
     }
+    public function getSort() {
+        return Clothes::findByID_Fold($this->lid, 0);
+    }
+    public function getFold() {
+        return Clothes::findByID_Fold($this->lid, 1);
+    }
+    public function getCustomer() {
+        return Customer::findByID($this->cid);
+    }
 
     public function getJSON() {
         $json_rep = array();
         $json_rep['lid'] = $this->lid;
         $json_rep['cid'] = $this->cid;
         $json_rep['color'] = $this->color;
+        $sort = $this->getSort();
+        $fold = $this->getFold();
+        if ($sort != null){
+            $json_rep['sort'] = $sort->getJSON();
+        }
+        if ($fold != null){
+            $json_rep['fold'] = $fold->getJSON();
+        }
         return json_encode($json_rep);
     }
 }

@@ -7,12 +7,13 @@
  */
 
 ini_set('display_errors', 'On');
+
 require_once('orm/Laundry.php');
 require_once('orm/Color.php');
 
 $path_components = explode('/', $_SERVER['PATH_INFO']);
 
-// Note that since extra path info starts with '/'
+// note that since extra path info starts with '/'
 // First element of path_components is always defined and always empty.
 // Note that we only retreive bathrooms, never update or add new ones.
 
@@ -20,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // POST to /laundry.php/<id>
     // Modifies existing laundry data probably
     if (count($path_components) >= 2 && $path_components[1] != "") {
-           header("HTTP/1.0 404 Not Found");
-           print("We do not support laundry.php/<id> posts right now");
-           exit();
+        header("HTTP/1.0 404 Not Found");
+        print("We do not support laundry.php/<id> posts right now");
+        exit();
     } else {
         // POST to /laundry.php/ to create new laundry
         // Validate values
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if (!isset($_REQUEST['color'])) {
             header("HTTP/1.0 400 Bad Request");
-            print("Missing color");
+            print("Missing a color");
             exit();
         }
         $color = intval($_REQUEST['color']);
@@ -66,6 +67,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit();
 
     }
+} else if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    // GET to /laundry.php/<id>
+    // Return laundry with all components
+    if (count($path_components) >= 2 && $path_components[1] != "") {
+        $lid = intval($path_components[1]);
+        $laundry = Laundry::findByID($lid);
+
+        //Generate JSON encoding of new Review
+        header("Content-type: application/json");
+        print($laundry->getJSON());
+        exit();
+    }
+    header("HTTP/1.0 404 Not Found");
+    print("We do not support laundry.php/<id> posts right now");
+    exit();
 }
 
 // If here, none of the above applied and URL could
@@ -73,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 // Request other than POST
 
 header("HTTP/1.0 400 Bad Request");
-print("Did not understand URL");
+print("Did not understand URL:"+$_SERVER['REQUEST_METHOD']);
 exit();
 
 ?>

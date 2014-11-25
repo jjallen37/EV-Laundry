@@ -29,9 +29,8 @@ try {
     $db->exec("DROP TABLE IF EXISTS Customers");
     $db->exec("DROP TABLE IF EXISTS Employees");
     $db->exec("DROP TABLE IF EXISTS Laundry");
-    $db->exec("DROP TABLE IF EXISTS Sort");
-    $db->exec("DROP TABLE IF EXISTS Fold");
-    $db->exec("DROP TABLE IF EXISTS Event");
+    $db->exec("DROP TABLE IF EXISTS Clothes");
+    $db->exec("DROP TABLE IF EXISTS Machine");
     $db->exec("DROP TABLE IF EXISTS Color");
     echo("Previous Tables Dropped<br>");
 
@@ -54,36 +53,30 @@ try {
                 colorID INTEGER PRIMARY KEY,
                 color TEXT,
                 lid INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Event (
-                lid INTEGER,
-                event INTEGER,
-                id INTEGER,
-                evtTime INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Sort (
-                sid INTEGER PRIMARY KEY,
-                lid INTEGER,
+    $db->exec("CREATE TABLE IF NOT EXISTS Clothes (
+                lid INTEGER NOT NULL,
                 eid INTEGER,
-                tops INTEGER,
-                bottoms INTEGER,
-                socks INTEGER,
-                other INTEGER)");
-    $db->exec("CREATE TABLE IF NOT EXISTS Fold (
-                fid INTEGER PRIMARY KEY,
-                lid INTEGER,
-                eid INTEGER,
+                isFold INTEGER NOT NULL,
                 tops INTEGER,
                 hang_tops INTEGER,
                 bottoms INTEGER,
                 hang_bottoms INTEGER,
                 socks INTEGER,
                 other INTEGER,
-                foldTime INTEGER)");
+                foldTime TIMESTAMP,
+                PRIMARY KEY ( lid, isFold))");
+    $db->exec("CREATE TABLE IF NOT EXISTS Machine (
+                lid INTEGER,
+                eid INTEGER,
+                isDryer INTEGER,
+                isLoad INTEGER,
+                num INTEGER)");
     echo("Tables Created<br>");
-
 
     /**************************************
      * Insert Available colors            *
      **************************************/
+
     // Employee test data
     $colors = array('Red','Blue','Green','Orange');
 
