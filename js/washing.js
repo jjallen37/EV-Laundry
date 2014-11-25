@@ -17,7 +17,8 @@ $(document).ready(function() {
 
     for (var i = 0; i < NUM_WASHERS; i++) {
         var washer;
-        $.ajax(url_base + "/washing.php/" + (i+1),
+        // GET each washer json
+        $.ajax(url_base + "/machine.php/washer/" + (i+1) + "/",
             {
                 type: "GET",
                 async: false,
@@ -52,7 +53,7 @@ $(document).ready(function() {
     }
 
     // Load washer
-    $("#empty-washer-submit-btn").click(function(e){
+    $("#load-washer-submit-btn").click(function(e){
         e.preventDefault(); // Don't submit form
         var colorID = $("#select-color-wload").val();
         var loadedWasher = washers[selected_washer_index];
@@ -170,7 +171,7 @@ function lidForColorID(colorID){
 }
 
 function postWasherAction(machine){
-    $.ajax(url_base + "/washing.php/",
+    $.ajax(url_base + "/machine.php/washer/",
         {
             type: "POST",
             async: false,

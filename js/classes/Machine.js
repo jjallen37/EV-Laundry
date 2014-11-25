@@ -39,11 +39,13 @@ Machine.prototype.makeCompactDiv = function() {
     var header_div = $('<div></div>');
     header_div.addClass("machine_header");
     var title;
+    var type;
     if (this.isDryer){
-        title = document.createTextNode("Dryer " + this.num);
+        type = "Dryer";
+        title = document.createTextNode(type + " " + this.num);
     } else {
-        //title = document.createTextNode("Washer " + this.num + " unloaded by Ernest Employee Extraordinary at 8:35 AM");
-        title = document.createTextNode("Washer " + this.num);
+        type = "Washer";
+        title = document.createTextNode(type + " " + this.num);
     }
     header_div.append(title);
     header_div.append($('<hr>'));
@@ -78,9 +80,9 @@ Machine.prototype.makeCompactDiv = function() {
                 break;
         }
         machine_div.append(colorbox_div);
-        bodyText = $('<h3>Click to Unload Washer</h3>');
+        bodyText = $('<h3>Click to Unload '+type+'</h3>');
     } else { // The machine is empty, needs loading
-        bodyText = $('<h3>Click to Load Washer</h3>');
+        bodyText = $('<h3>Click to Load '+type+'</h3>');
     }
     body_div.append(bodyText);
     machine_div.append(body_div);

@@ -61,7 +61,7 @@ class Machine
      * Input: Washer or Dryer number
      * Output: PHP object representing most recent operation on machine
      */
-    public static function getWasher($num){
+    public static function getMachine($isDryer, $num){
         // Create (connect to) SQLite database in file
         $db = new PDO('sqlite:../db/ev_db.db');
         // Set errormode to exceptions
@@ -69,8 +69,9 @@ class Machine
             PDO::ERRMODE_EXCEPTION);
 
         $stmt = $db->prepare('SELECT * FROM Machine
-                              WHERE isDryer == 0 AND num == :num
+                              WHERE isDryer == :isDryer AND num == :num
                               ORDER BY datetime(thyme) DESC LIMIT 1');
+        $stmt->bindParam(':isDryer', $isDryer);
         $stmt->bindParam(':num', $num);
         $stmt->execute();
 
@@ -84,13 +85,9 @@ class Machine
                 $row['thyme']);
             return $machine;
         } else {
-            $machine = new Machine(0, 0, 0, 0, $num, 0);
+            $machine = new Machine($isDryer, 0, 0, 0, $num, 0);
             return $machine;
         }
-    }
-
-    public static function getDryer($num){ // Returns last operation on dryer
-        return null;
     }
 
     public function isDryer() {
