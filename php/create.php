@@ -63,14 +63,16 @@ try {
                 hang_bottoms INTEGER,
                 socks INTEGER,
                 other INTEGER,
-                foldTime TIMESTAMP,
+                thyme TIMESTAMP,
                 PRIMARY KEY ( lid, isFold))");
     $db->exec("CREATE TABLE IF NOT EXISTS Machine (
+                mid INTEGER PRIMARY KEY,
                 lid INTEGER,
                 eid INTEGER,
                 isDryer INTEGER,
                 isLoad INTEGER,
-                num INTEGER)");
+                num INTEGER,
+                thyme TIMESTAMP)");
     echo("Tables Created<br>");
 
     /**************************************

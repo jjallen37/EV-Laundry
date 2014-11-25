@@ -11,11 +11,11 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
     <link rel="stylesheet" href="css/jquery.mobile-1.4.4.min.css" />
     <link rel="stylesheet" href="themes/theme6.min.css"/>
     <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.4.4.min.js"></script>
+    <link rel="stylesheet" href="css/machine.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
     <script src="js/classes/Machine.js"></script>
-    <script src="js/laundry_room.js"></script>
-    <script src="js/laundry_room.js"></script>
+    <script src="js/washing.js"></script>
 
     <style>
         .noshadow * {
@@ -64,25 +64,15 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <!-- Washers -->
         <h3 style="text-align: center;">Washers</h3>
         <div class="ui-grid-c">
-            <div class="ui-block-a"><div id="washer-1" class="ui-bar ui-bar-a" style="height:110px">
-                Washer 1<hr>
-                <a href="#busy_wash_dialog" id="washer-1-btn">Card 4</a>
-                <span style="float: right;font-size: smaller">Started at 9:37 AM</span>
-            </div></div>
+            <div class="ui-block-a">
+                <a id="washer-1" data-role="button" data-theme="" style="height:110px">
+                </a>
+            </div>
             <div class="ui-block-b"><div id="washer-2" class="ui-bar ui-bar-a" style="height:110px">
-                Washer 2<hr>
-                <a href="#busy_wash_dialog" id="washer-2-btn">Card 2</a>
-                <span style="float: right;font-size: smaller;color: green">Completed at 10:12 AM</span>
             </div></div>
             <div class="ui-block-c"><div id="washer-3" class="ui-bar ui-bar-a" style="height:110px">
-                Washer 3<hr>
-                <a href="#empty_wash_dialog" id="washer-3-btn" class="washer">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
             <div class="ui-block-d"><div id="washer-4" class="ui-bar ui-bar-a" style="height:110px">
-                Washer 4<hr>
-                <a href="#empty_wash_dialog" id="washer-4-btn" class="washer">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
         </div><!-- /grid-c -->
 
@@ -91,35 +81,20 @@ http://demos.jquerymobile.com/1.4.4/theme-default/
         <h3 style="text-align: center;">Dryers</h3>
         <!-- Dryers -->
         <div class="ui-grid-b">
-            <div id="dryer-1" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:110px">
+            <div class="ui-block-a"><div id="dryer-1" class="ui-bar ui-bar-a" style="height:110px">
                 Dryer 1<hr>
                 <a href="#unload_dryer_dialog" id="dryer-1-btn">Card 4</a>
                 <span style="float: right;font-size: smaller">Started at 9:42 AM</span>
             </div></div>
             <div id="dryer-2" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:110px">
-                Dryer 2<hr>
-                <a href="#unload_dryer_dialog" id="dryer-2-btn">Card 8</a>
-                <span style="float: right;font-size: smaller">Done</span>
             </div></div>
             <div id="dryer-3" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:110px">
-                Dryer 3<hr>
-                <a href="#emptyDialog" id="dryer-3-btn">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
             <div id="dryer-4" class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:110px">
-                Dryer 4<hr>
-                <a href="#emptyDialog" id="dryer-4-btn">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
             <div id="dryer-5" class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:110px">
-                Dryer 5<hr>
-                <a href="#emptyDialog" id="dryer-5-btn">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
             <div id="dryer-6" class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:110px">
-                Dryer 6<hr>
-                <a href="#emptyDialog" id="dryer-6-btn">Empty</a>
-                <span style="float: right;font-size: smaller"></span>
             </div></div>
         </div><!-- /grid-c -->
 
