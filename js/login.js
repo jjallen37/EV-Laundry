@@ -29,9 +29,12 @@ $(document).ready(function() {
                 window.location.href = "sorting.html";
                 break;
             case 1:
-                window.location.href = "laundry_room.html";
+                window.location.href = "washing.html";
                 break;
             case 2:
+                window.location.href = "drying.html";
+                break;
+            case 3:
                 window.location.href = "folding.html";
                 break;
             default:

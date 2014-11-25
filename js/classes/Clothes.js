@@ -12,6 +12,7 @@ var Clothes = function(count_json){
     this.other = count_json.other;
     this.hang_tops = count_json.hang_tops;
     this.hang_bottoms = count_json.hang_bottoms;
+    this.thyme = count_json.thyme;
 };
 
 Clothes.prototype.makeCompactDiv = function() {

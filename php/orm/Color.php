@@ -99,7 +99,7 @@ class Color
         $json_rep['colors'] = $color_array;
         $json_rep['lids'] = $lid_array;
 
-        return json_encode($json_rep);
+        return json_encode($json_rep, JSON_NUMERIC_CHECK);
     }
 }
 

@@ -100,5 +100,5 @@ class Customer
         $json_rep['firstName'] = $this->firstName;
         $json_rep['lastName'] = $this->lastName;
         $json_rep['name'] = $this->firstName . ' ' . $this->lastName;
-        return json_encode($json_rep);
+        return json_encode($json_rep, JSON_NUMERIC_CHECK);
     }}

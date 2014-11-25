@@ -118,6 +118,6 @@ class Laundry
         if ($fold != null){
             $json_rep['fold'] = $fold->getJSON();
         }
-        return json_encode($json_rep);
+        return json_encode($json_rep, JSON_NUMERIC_CHECK);
     }
 }

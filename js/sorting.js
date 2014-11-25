@@ -14,7 +14,6 @@ $(document).ready(function() {
     /*
         Load Customer and Color Data
      */
-
     $.ajax(url_base + "/color.php/",
         {
             type: "GET",
@@ -103,9 +102,8 @@ $(document).ready(function() {
         time_started = Date.now();
 
         colorID = $('#select-color-sort').val();
-        $("#slider-id-num").val();
         var json_str = '{ ' +
-                        '"color" : ' + $('#select-color-sort').val() + ',' +
+                        '"color" : ' + colorID + ',' +
                         '"cid" : 1 }';
         console.log(json_str);
         var obj = JSON.parse(json_str);

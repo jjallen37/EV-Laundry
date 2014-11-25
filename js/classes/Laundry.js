@@ -39,7 +39,6 @@ var Laundry = function(laundry_json) {
             data: obj,
             success: function(json, status, jqxhr) {
                 tmp2 = new Clothes(json);
-                console.log("sort clothes received");
             },
 
             error: function(jqxhr, status, error) {
@@ -54,11 +53,11 @@ Laundry.prototype.makeCompactDiv = function() {
     laundryDiv.addClass('laundry_cell');
 
     laundryDiv.text("LID:"+this.lid);
-    laundryDiv.append("<br>");
-    laundryDiv.append("Customer Name:"+this.customer.name);
-
-    if (this.sort != null){
-        laundryDiv.append(this.sort.makeCompactDiv());
-    }
+    //laundryDiv.append("<br>");
+    //laundryDiv.append("Customer Name:"+this.customer.name);
+    //
+    //if (this.sort != null){
+    //    laundryDiv.append(this.sort.makeCompactDiv());
+    //}
     return laundryDiv;
 };
