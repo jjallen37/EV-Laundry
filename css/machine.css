@@ -1,0 +1,32 @@
+.ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d{
+    /*background-color: lightgray;*/
+    /*height: 100px;*/
+    /*font-weight: bold;*/
+    /*text-align: center;*/
+    padding: 20px;
+}
+
+/*.MACHINE_DIV {*/
+    /*height: 110px;*/
+/*}*/
+.machine_div .machine_header {
+    vertical-align: text-top;
+}
+
+.machine_div .machine_color {
+    width: 60px;
+    height: 60px;
+    float: left;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.machine_div .machine_body {
+}
+
+.machine_div .machine_footer {
+    vertical-align: text-bottom;
+    text-align: right;
+    font-size: 75%;
+    color: darkgray;
+}

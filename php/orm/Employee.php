@@ -99,5 +99,5 @@ class Employee
         $json_rep['eid'] = $this->eid;
         $json_rep['firstName'] = $this->firstName;
         $json_rep['lastName'] = $this->lastName;
-        return json_encode($json_rep);
+        return json_encode($json_rep, JSON_NUMERIC_CHECK);
     }}

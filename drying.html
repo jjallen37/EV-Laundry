@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+Modified from this example
+http://demos.jquerymobile.com/1.4.4/theme-default/
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EV Laundry - Dryers</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="themes/theme6.min.css"/>
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/machine.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <!--<script src="js/classes/Customer.js"></script>-->
+    <!--<script src="js/classes/Clothes.js"></script>-->
+    <!--<script src="js/classes/Laundry.js"></script>-->
+    <script src="js/classes/Machine.js"></script>
+    <script src="js/drying.js"></script>
+
+    <style>
+        .noshadow * {
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="washer_page">
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>Drying</h1>
+        <a href="login.html" id="user_button_2" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Earl Extraordinary</a>
+        <script>
+            if(typeof(Storage) !== "undefined") {
+                if (sessionStorage.eid) {
+                    $("#user_button_2").html(sessionStorage.username);
+                } else {
+                    window.location.href = "login.html";
+                }
+            } else {
+                $("#user_button_2").html("LOGIN DISABLED");
+            }
+        </script>
+
+        <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>-->
+        <div data-role="navbar">
+            <ul>
+                <li><a href="sorting.html" data-ajax="false">Sorting</a></li>
+                <li><a href="washing.html" data-ajax="false">Washing</a></li>
+                <li><a href="#" data-ajax="false" class="ui-link ui-btn ui-btn-active ui-state-persist">Drying</a></li>
+                <li><a href="folding.html" data-ajax="false">Folding</a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+        <!-- Dry -->
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a id="dryer-1" data-role="button" style="height:110px">
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a id="dryer-2" data-role="button" style="height:110px">
+                </a>
+            </div>
+            <div class="ui-block-a">
+                <a id="dryer-3" data-role="button" style="height:110px">
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a id="dryer-4" data-role="button" style="height:110px">
+                </a>
+            </div>
+            <div class="ui-block-a">
+                <a id="dryer-5" data-role="button" style="height:110px">
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a id="dryer-6" data-role="button" style="height:110px">
+                </a>
+            </div>
+        </div><!-- /grid-c -->
+
+        <br>
+    </div><!-- /content -->
+
+    <!-- Footer -->
+    <div data-role="footer" data-position="fixed">
+    </div>
+
+    <!-- Load Dryer Popup -->
+    <div data-role="popup" id="load_dry_popup" data-theme="a" class="ui-corner-all">
+        <div style="padding: 10px 20px;">
+        <h3 style="text-align: center">Load Dryer</h3>
+        <form id="load-dryer-form" style="padding: 10px 20px;">
+            <div class="ui-field-contain">
+                <label for="select-color-dload">Laundry Color:</label>
+                <select name="select-color-dload" id="select-color-dload">
+                    <option>Color 1</option>
+                    <option>Color 2</option>
+                    <option>Color 3</option>
+                </select>
+            </div>
+
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="dryer_correct_setting" name="dryer_correct_setting">Dryers on correct setting?
+                </label>
+            </div>
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="load-dryer-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+        </div>
+    </div>
+
+    <!-- Load Dryer Popup -->
+    <div data-role="popup" id="unload_dry_popup" data-theme="a" class="ui-corner-all">
+        <div style="padding: 10px 20px;">
+        <h3 style="text-align: center">Unload Dryer</h3>
+        <form id="unload-dryer-form">
+            <!-- Job Coach QA Checklist -->
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="items_dry" name="items_dry">ITEMS DRY?
+                </label>
+            </div>
+            <div class="ui-field-contain">
+                <label>
+                    <input type="checkbox" id="dryers_empty" name="dryers_empty">Items over edge? Dryers empty?
+                </label>
+            </div>
+            <!-- Form Submission -->
+            <div class="ui-field-contain">
+                <input type="submit" id="unload-dryer-submit-btn" value="Submit">
+            </div>
+        </form>  <!-- /form -->
+        </div>
+    </div>
+</div><!-- /page -->
+</body>
+</html>
