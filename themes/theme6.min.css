@@ -44,7 +44,7 @@ div.ui-controlgroup-label {
 .ui-field-contain {
 	border-bottom-color: #828282;
 	border-bottom-color: rgba(0,0,0,.15);
-	border-bottom-width: 1px;
+	border-bottom-width: 0;
 	border-bottom-style: solid;
 }
 /* Table opt-in classes: strokes between each row, and alternating row stripes */
