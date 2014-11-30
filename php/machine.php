@@ -53,35 +53,36 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     $eid = intval($_REQUEST['eid']);
 
-    // Washer Number
+    // Machine Number
     if (!isset($_REQUEST['num'])) {
         header("HTTP/1.0 400 Bad Request");
         print("Missing machine number");
         exit();
     }
     $num = intval($_REQUEST['num']);
-    if ($num < 1 || $num > $NUM_WASHERS){
+    $NUM_MAX = $isDryer ? $NUM_DRYERS : $NUM_WASHERS;
+    if ($num < 1 || $num > $NUM_MAX){
         header("HTTP/1.0 400 Bad Request");
         print("Invalid machine number : " . $num);
         exit();
     }
 
     // Verify that this is a legal operation
-    $currentWasher = Machine::getMachine($isDryer, $num);
+    $currentMachine = Machine::getMachine($isDryer, $num);
     // Currently the machine is loaded, expecting an unload
-    if ($currentWasher->isLoad() && $isLoad){
+    if ($currentMachine->isLoad() && $isLoad){
         header("HTTP/1.0 400 Bad Request");
         print("Invalid load command on full machine");
         exit();
     }
-    if (!$currentWasher->isLoad() && !$isLoad){ // Empty -> Empty
+    if (!$currentMachine->isLoad() && !$isLoad){ // Empty -> Empty
         header("HTTP/1.0 400 Bad Request");
         print("Invalid unload command on empty machine");
         exit();
     }
     // Loaded -> Empty
-    if ($currentWasher->isLoad() &&
-        $currentWasher->getLID() != $lid){ // Unloading a different laundry
+    if ($currentMachine->isLoad() &&
+        $currentMachine->getLID() != $lid){ // Unloading a different laundry
             header("HTTP/1.0 400 Bad Request");
             print("Invalid request. Can not unload with different laundry id.");
             exit();
