@@ -23,12 +23,17 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             exit();
         }
 
-        //Generate JSON encoding of new Review
+        //Generate JSON encoding of new Customer
         header("Content-type: application/json");
         print($customer->getJSON());
         exit();
+    } else {
+        //Generate JSON encoding of all customer ids
+        header("Content-type: application/json");
+        print(json_encode(Customer::getAllIDs()));
+        exit();
     }
-} else  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // POST to /customer.php/
     // Creates new count
     if (!(count($path_components) >= 2 && $path_components[1] != "")) {

@@ -20,14 +20,24 @@ if (!isset($_GET['eid'])) {
 </head>
 <body>
 <div data-role="page" id="employee_page">
-    <script src="js/employee_view.js"></script>
+    <script src="../js/classes/Employee.js"></script>
+    <script src="employee_view.js"></script>
     <!-- Header -->
     <div data-role="header">
-        <h1>Ev Employee Page</h1>
+        <!-- Header -->
+        <h1 id="employee_header"></h1>
+        <a href="employees_view.html" class="ui-btn ui-corner-all ui-shadow ui-icon-left ui-btn-icon-left">Employee List</a>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
+        <form id="eid_form">
+            <input type='hidden' id='eid' name='eid' value=<?php echo $_GET["eid"]; ?>>
+        </form>
+        <br>
+        <!--  List every event associated with the employee  -->
+        <ul id="employee_ul" data-role="listview" data-inset="true">
+        </ul>
     </div>
 </div>
 </body>

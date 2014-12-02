@@ -13,19 +13,25 @@ $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // GET to /customers.php/<id>
-    // Return laundry with all components
+    // Return specific employees
     if (count($path_components) >= 2 && $path_components[1] != "") {
         $eid = intval($path_components[1]);
-        $employee = Customer::findByID($eid);
+
+        $employee = Employee::findByID($eid);
         if ($employee == null) {
             header("HTTP/1.0 400 Bad Request");
             print("Bad EID");
             exit();
         }
 
-        //Generate JSON encoding of new Review
+        //Generate JSON encoding of new Employees
         header("Content-type: application/json");
         print($employee->getJSON());
+        exit();
+    } else {
+        //Generate JSON encoding of all employee ids
+        header("Content-type: application/json");
+        print(json_encode(Employee::getAllIDs()));
         exit();
     }
 } else  if ($_SERVER['REQUEST_METHOD'] == "POST") {

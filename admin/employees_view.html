@@ -2,23 +2,27 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>EV Employees List</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+    <!--<link rel="stylesheet" href="themes/Theme6.min.css"/>-->
+    <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 </head>
 <body>
 <div data-role="page" id="employees_page">
+    <script src="../js/classes/Employee.js"></script>
+    <script src="employees_view.js"></script>
     <!-- Header -->
     <div data-role="header">
-        <h1>EV Employees Page</h1>
+        <h1>EV Employees</h1>
+        <a href="../admin.html" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Admin</a>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-        <ul data-role="listview" data-inset="true">
-                <li><a href="admin/laundry_list.html">Laundry List</a></li>
-                <li><a href="admin/employees_view.html">Employees</a></li>
-                <li><a href="admin/customers_view.html">Customers</a></li>
-                <li><a href="admin/colors_view.html">Colors</a></li>
-                <li><a href="admin/create.html">Reset Data</a></li>
+        <div id="employee_status"></div>
+        <ul id="employees_ul" data-role="listview" data-inset="true">
         </ul>
     </div>
 </div>

@@ -3,12 +3,12 @@
  * Created by jjallen on 12/1/14.
  */
 
-var url_base = "php";
+var url_base = "../";
 
 $(document).ready(function() {
 
     // Create/clear the database
-    $.ajax(url_base + "/create.php/",
+    $.ajax(url_base + "php/create.php/",
         {
             type: "POST",
             async: false,
@@ -24,7 +24,7 @@ $(document).ready(function() {
     var employee_div = $("#employees_result");
     $.ajax({
         type: "GET",
-        url: "db/test_employees.csv",
+        url: url_base+"db/test_employees.csv",
         dataType: "text",
         success: function (data) {
             employee_div.html($('<p>Employees Loaded</p>'));
@@ -41,7 +41,7 @@ $(document).ready(function() {
     $.ajax({
         async: false,
         type: "GET",
-        url: "db/test_customers.csv",
+        url: url_base+"db/test_customers.csv",
         dataType: "text",
         success: function (data) {
             customer_div.html($('<p>Customers Loaded</p>'));
@@ -63,7 +63,7 @@ function processCustomers(data) {
             var json_str = '{ ' +
                 '"name": "' + name + '"}';
             var obj = JSON.parse(json_str);
-            $.ajax(url_base + "/customers.php/",
+            $.ajax(url_base + "php/customers.php/",
                 {
                     type: "POST",
                     async: false,
@@ -86,7 +86,7 @@ function processEmployees(data) {
             var json_str = '{ ' +
                 '"name": "' + name + '"}';
             var obj = JSON.parse(json_str);
-            $.ajax(url_base + "/employees.php/",
+            $.ajax(url_base + "php/employees.php/",
                 {
                     type: "POST",
                     async: false,

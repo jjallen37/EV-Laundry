@@ -49,7 +49,8 @@ class Employee
         $db->setAttribute(PDO::ATTR_ERRMODE,
             PDO::ERRMODE_EXCEPTION);
 
-        $result = $db->query('SELECT eid FROM Employees');
+        $result = $db->query('SELECT eid FROM Employees
+                              ORDER BY name');
         $id_array = array();
 
         foreach ($result as $r){
@@ -66,7 +67,8 @@ class Employee
         $db->setAttribute(PDO::ATTR_ERRMODE,
             PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $db->prepare('SELECT * FROM Employees WHERE eid == :eid');
+        $stmt = $db->prepare('SELECT * FROM Employees
+                              WHERE eid == :eid');
         $stmt->bindParam(':eid', $eid);
         $stmt->execute();
 

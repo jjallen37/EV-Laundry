@@ -7,13 +7,16 @@ var Employee = function(employee_json){
     this.name = employee_json.name;
 };
 
-
 Employee.prototype.makeCompactLi = function() {
-    var href = '/employee_view.php?eid='+this.eid;
-    var text = document.createTextNode(this.name);
-    var li = $('<li><a></a></li>');
-    li.prop('href',href);
-    li.html(text);
-    return li;
+    return $('<li/>', {    //here appending `<li>`
+        'id': 'employee-li'+this.eid
+    }).append($('<a/>', {    //here appending `<a>` into `<li>`
+        'href': 'employee_view.php?eid='+this.eid,
+        'data-transition': 'slide',
+        'text': this.name
+    }));
 };
 
+Employee.prototype.makeHeader = function() {
+    return $('<h1>'+this.name+'</h1>')
+};
