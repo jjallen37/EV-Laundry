@@ -5,7 +5,7 @@
 
 var url_base = "php";
 
-$(document).on('pagecreate',function() {
+$(document).ready(function() {
 
     // Create/clear the database
     $.ajax(url_base + "/create.php/",
@@ -62,7 +62,6 @@ function processCustomers(data) {
         if (name.trim() != "") {
             var json_str = '{ ' +
                 '"name": "' + name + '"}';
-            console.log(json_str);
             var obj = JSON.parse(json_str);
             $.ajax(url_base + "/customers.php/",
                 {
@@ -86,7 +85,6 @@ function processEmployees(data) {
         if (name.trim() != "") {
             var json_str = '{ ' +
                 '"name": "' + name + '"}';
-            console.log(json_str);
             var obj = JSON.parse(json_str);
             $.ajax(url_base + "/employees.php/",
                 {

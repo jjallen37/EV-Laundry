@@ -8,10 +8,18 @@
     <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-    <script src="js/create.js"></script>
 </head>
 <body>
 <div data-role="page" id="create_page">
+    <!-- Putting the script in here allows it to be loaded from ajax links-->
+    <script src="create.js"></script>
+
+    <!-- Header and Navigation Bar -->
+    <div data-role="header">
+        <h1>Sorting</h1>
+        <a href="../admin.html" class="ui-btn ui-corner-all ui-shadow ui-icon-user ui-btn-icon-left">Admin</a>
+    </div><!-- /header -->
+
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
         <div id="other_result">

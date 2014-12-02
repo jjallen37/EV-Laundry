@@ -1,8 +1,17 @@
+<?php
+
+if (!isset($_GET['eid'])) {
+    header("Location: http://wwwx.cs.unc.edu/Courses/comp426-f13/jamesml/site/index.html");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>EV Admin Page</title>
+    <title>Employee View</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
     <!--<link rel="stylesheet" href="themes/Theme6.min.css"/>-->
     <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
@@ -10,22 +19,16 @@
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 </head>
 <body>
-<div data-role="page" id="admin_page">
+<div data-role="page" id="employee_page">
+    <script src="js/employee_view.js"></script>
     <!-- Header -->
     <div data-role="header">
-        <h1>EV Admin Page</h1>
+        <h1>Ev Employee Page</h1>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-        <ul data-role="listview" data-inset="true">
-                <li><a href="admin/laundry_list.html">Laundry List</a></li>
-                <li><a href="admin/employees_view.html">Employees</a></li>
-                <li><a href="admin/customers_view.html">Customers</a></li>
-                <li><a href="admin/create.html">Reset Data</a></li>
-        </ul>
     </div>
 </div>
-
 </body>
 </html>
