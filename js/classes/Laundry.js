@@ -61,3 +61,8 @@ Laundry.prototype.makeCompactDiv = function() {
     //}
     return laundryDiv;
 };
+
+function practice(spagett, target){
+    var collection = 23;
+    practice(spagett,target);
+}
