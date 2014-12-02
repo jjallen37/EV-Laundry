@@ -11,6 +11,7 @@
 </head>
 <body>
 <div data-role="page" id="admin_page">
+    <script src="admin/admin.js"></script>
     <!-- Header -->
     <div data-role="header">
         <h1>EV Admin Page</h1>
@@ -18,11 +19,11 @@
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-        <ul data-role="listview" data-inset="true">
-                <li><a href="admin/laundry_list.html">Laundry List</a></li>
-                <li><a href="admin/employees_view.html">Employees</a></li>
-                <li><a href="admin/customers_view.html">Customers</a></li>
-                <li><a href="admin/create.html">Reset Data</a></li>
+        <ul id="admin_list" data-role="listview" data-inset="true">
+            <li><a href="admin/laundry_list.html">Laundry List</a></li>
+            <li><a href="admin/employees_view.html">Employees</a></li>
+            <li><a href="admin/customers_view.html">Customers</a></li>
+            <li><a href="admin/create.html">Reset Data</a></li>
         </ul>
     </div>
 </div>

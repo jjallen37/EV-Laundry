@@ -12,20 +12,20 @@ var Laundry = function(laundry_json) {
     var tmp1;
     var tmp2;
 
-    // Grab customer data from REST
-    $.ajax(url_base + "/customers.php/" + this.cid + "/",
-        {
-            type: "GET",
-            async: false,
-            success: function (json, status, jqxhr) {
-                tmp1 = new Customer(json);
-            },
-
-            error: function (jqxhr, status, error) {
-                console.log("failure1:" + jqxhr.responseText);
-            }
-        });
-    this.customer = tmp1;
+    //// Grab customer data from REST
+    //$.ajax(url_base + "/customers.php/" + this.cid + "/",
+    //    {
+    //        type: "GET",
+    //        async: false,
+    //        success: function (json, status, jqxhr) {
+    //            tmp1 = new Customer(json);
+    //        },
+    //
+    //        error: function (jqxhr, status, error) {
+    //            console.log("failure1:" + jqxhr.responseText);
+    //        }
+    //    });
+    //this.customer = tmp1;
 
     // Grab sort data from REST
     var json_str = '{ ' +
@@ -48,21 +48,12 @@ var Laundry = function(laundry_json) {
     this.sort = tmp2;
 };
 
-Laundry.prototype.makeCompactDiv = function() {
-    var laundryDiv = $("<div></div>");
-    laundryDiv.addClass('laundry_cell');
-
-    laundryDiv.text("LID:"+this.lid);
-    //laundryDiv.append("<br>");
-    //laundryDiv.append("Customer Name:"+this.customer.name);
-    //
-    //if (this.sort != null){
-    //    laundryDiv.append(this.sort.makeCompactDiv());
-    //}
-    return laundryDiv;
+Laundry.prototype.makeCompactLi = function() {
+    return $('<li/>', {    //here appending `<li>`
+        'id': 'laundry-li'+this.lid
+    }).append($('<a/>', {    //here appending `<a>` into `<li>`
+        'href': 'laundry_view.php?lid='+this.lid,
+        'data-transition': 'slide',
+        'text': this.lid
+    }));
 };
-
-function practice(spagett, target){
-    var collection = 23;
-    practice(spagett,target);
-}
