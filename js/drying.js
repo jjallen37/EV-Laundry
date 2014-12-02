@@ -11,47 +11,11 @@ var selected_dryer_index = -1;
 
 var url_base = "php";
 
-$(document).ready(function() {
+$(document).on('pagecreate',function() {
     /*
      Initialize dryers
      */
-    updateAvailableColors();
-
-    for (var i = 0; i < NUM_DRYERS; i++) {
-        var dryer;
-        $.ajax(url_base + "/machine.php/dryer/" + (i+1),
-            {
-                type: "GET",
-                async: false,
-                dataType: "json",
-                success: function (dryer_json, status, jqXHR) {
-                    dryer = new Machine(dryer_json);
-                },
-                error: function (jqXHR, status, error) {
-                    // This (hopefully means) that there hasn't been any action associated
-                    console.log("Failure getting dryer info:" + jqXHR.responseText);
-                }
-            });
-
-        dryers.push(dryer);
-        // These attributes allow the link to present a popup
-        $(dryer_ids[i]).attr("data-rel","popup");
-        $(dryer_ids[i]).attr("data-position-to","window");
-        $(dryer_ids[i]).attr("data-transition","pop");
-
-        // This handler keeps track of which washer was clicked last
-        // used for determining who called the load/unload
-        $(dryer_ids[i]).on('click', function (e) {
-            selected_dryer_index = $(this).attr('id').slice(-1) - 1;
-        });
-
-        $(dryer_ids[i]).append(dryer.makeCompactDiv());
-        if (dryer.isLoad){ // Last action was a load, expecting an unload
-            $(dryer_ids[i]).prop("href","#unload_dry_popup");
-        } else {
-            $(dryer_ids[i]).prop("href","#load_dry_popup");
-        }
-    }
+    refreshDryers();
 
     // Load dryer
     $("#load-dryer-submit-btn").click(function(e){
@@ -67,16 +31,9 @@ $(document).ready(function() {
         // Post load action to DB
         var dryer = postDryerAction(loadedWasher);
         if (dryer != null){
-            dryers[selected_dryer_index] = dryer;
-            $(dryer_ids[selected_dryer_index]).empty();
-            $(dryer_ids[selected_dryer_index]).append(dryer.makeCompactDiv());
-
-            // If the object is waiting to unload
-            if (dryer.isLoad){
-                $(dryer_ids[i]).prop("href","#unload_dry_popup");
-            } else {
-                $(dryer_ids[i]).prop("href","#load_dry_popup");
-            }
+            refreshDryers();
+        } else {
+            console.log("TODO: Load dryer error handling.")
         }
 
         $('#load_dry_popup').popup('close');
@@ -96,22 +53,58 @@ $(document).ready(function() {
         // Post load action to DB
         var dryer = postDryerAction(unloadedDryer);
         if (dryer != null){
-            dryers[selected_dryer_index] = dryer;
-            $(dryer_ids[selected_dryer_index]).empty();
-            $(dryer_ids[selected_dryer_index]).append(dryer.makeCompactDiv());
-
-            // If the object is waiting to unload
-            if (dryer.isLoad){
-                $(dryer_ids[i]).prop("href","#unload_dry_popup");
-            } else {
-                $(dryer_ids[i]).prop("href","#load_dry_popup");
-            }
+            refreshDryers();
+        } else {
+            console.log("TODO: Unload dryer error handling.")
         }
         $('#unload_dry_popup').popup('close');
     });
 
+    $("#refresh-dry-btn").click(function(e){
+        e.preventDefault();
+        refreshDryers();
+    });
 });
 
+function refreshDryers(){
+    updateAvailableColors();
+    for (var i = 0; i < NUM_DRYERS; i++) {
+        var dryer;
+        $.ajax(url_base + "/machine.php/dryer/" + (i+1),
+            {
+                type: "GET",
+                async: false,
+                dataType: "json",
+                success: function (dryer_json, status, jqXHR) {
+                    dryer = new Machine(dryer_json);
+                },
+                error: function (jqXHR, status, error) {
+                    // This (hopefully means) that there hasn't been any action associated
+                    console.log("Failure getting dryer info:" + jqXHR.responseText);
+                }
+            });
+
+        dryers.push(dryer);
+        // These attributes allow the link to present a popup
+        $(dryer_ids[i]).empty();
+        $(dryer_ids[i]).attr("data-rel","popup");
+        $(dryer_ids[i]).attr("data-position-to","window");
+        $(dryer_ids[i]).attr("data-transition","pop");
+
+        // This handler keeps track of which washer was clicked last
+        // used for determining who called the load/unload
+        $(dryer_ids[i]).on('click', function (e) {
+            selected_dryer_index = $(this).attr('id').slice(-1) - 1;
+        });
+
+        $(dryer_ids[i]).append(dryer.makeCompactDiv());
+        if (dryer.isLoad){ // Last action was a load, expecting an unload
+            $(dryer_ids[i]).prop("href","#unload_dry_popup");
+        } else {
+            $(dryer_ids[i]).prop("href","#load_dry_popup");
+        }
+    }
+}
 /*
  Fills load dialog with assigned colors
  */
@@ -172,6 +165,7 @@ function lidForColorID(colorID){
 }
 
 function postDryerAction(machine){
+    var dryer = null;
     $.ajax(url_base + "/machine.php/",
         {
             type: "POST",
@@ -179,13 +173,12 @@ function postDryerAction(machine){
             data: machine,
             success: function(dryer_json, status, jqXHR) {
                 console.log("Dryer action completed.");
-                return new Machine(dryer_json);
+                dryer = new Machine(dryer_json);
             },
             error: function(jqXHR, status, error) {
                 console.log("Failure posting dryer action : " + jqXHR.responseText);
                 return null;
             }});
+    return dryer;
 }
-
-
 

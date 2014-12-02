@@ -1,0 +1,51 @@
+#customer_color_block{
+    width: 75px;
+    height: 75px;
+    float: left;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: green;
+}
+
+#customer_name_header{
+    padding: 5px;
+}
+
+#color_block{
+    width: 200px;
+    height: 200px;
+    background: repeating-linear-gradient(
+            45deg,
+            #606dbc,
+            #606dbc 10px,
+            #465298 10px,
+            #465298 20px
+    );
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+#color_block2{
+    width: 200px;
+    height: 200px;
+    background: repeating-radial-gradient(
+            circle,
+            purple,
+            purple 10px,
+            #4b026f 10px,
+            #4b026f 20px
+    );
+    -webkit-mask: url('../images/tops.png') top left / cover;
+
+}
+
+.ui-grid-b{
+    margin: 0 auto;
+}
+
+.ui-block-a, .ui-block-b, .ui-block-c{
+}

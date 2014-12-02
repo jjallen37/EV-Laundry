@@ -9,49 +9,11 @@ var NUM_WASHERS = 4;
 var selected_washer_index = -1;
 var url_base = "php";
 
-$(document).ready(function() {
+$(document).on('pagecreate',function() {
     /*
         Initialize washers
      */
-    updateAvailableColors();
-
-    for (var i = 0; i < NUM_WASHERS; i++) {
-        var washer;
-        // GET each washer json
-        $.ajax(url_base + "/machine.php/washer/" + (i+1) + "/",
-            {
-                type: "GET",
-                async: false,
-                dataType: "json",
-                success: function (washer_json, status, jqXHR) {
-                    washer = new Machine(washer_json);
-                },
-                error: function (jqXHR, status, error) {
-                    // This (hopefully means) that there hasn't been any action associated
-                    console.log("washer " + (i+1) + " faliure:" + jqXHR.responseText);
-                }
-            });
-
-        washers.push(washer);
-        // These attributes allow the link to present a popup
-        $(washer_ids[i]).attr("data-rel","popup");
-        $(washer_ids[i]).attr("data-position-to","window");
-        $(washer_ids[i]).attr("data-transition","pop");
-
-        // This handler keeps track of which washer was clicked last
-        // used for determining who called the load/unload
-        $(washer_ids[i]).on('click', function (e) {
-            selected_washer_index = $(this).attr('id').slice(-1) - 1;
-        });
-
-        $(washer_ids[i]).append(washer.makeCompactDiv());
-        if (washer.isLoad){ // Last action was a load, expecting an unload
-            $(washer_ids[i]).prop("href","#unload_wash_popup");
-        } else {
-            $(washer_ids[i]).prop("href","#load_wash_popup");
-        }
-    }
-
+    refreshWashers();
     // Load washer
     $("#load-washer-submit-btn").click(function(e){
         e.preventDefault(); // Don't submit form
@@ -66,16 +28,9 @@ $(document).ready(function() {
         // Post load action to DB
         var washer = postWasherAction(loadedWasher);
         if (washer != null){
-            washers[selected_washer_index] = washer;
-            $(washer_ids[selected_washer_index]).empty();
-            $(washer_ids[selected_washer_index]).append(washer.makeCompactDiv());
-
-            // If the object is waiting to unload
-            if (washer.isLoad){
-                $(washer_ids[i]).prop("href","#unload_wash_popup");
-            } else {
-                $(washer_ids[i]).prop("href","#load_wash_popup");
-            }
+            refreshWashers();
+        } else {
+            console.log("TODO: Handle load washer error")
         }
 
         $('#load_wash_popup').popup('close');
@@ -95,22 +50,61 @@ $(document).ready(function() {
         // Post load action to DB
         var washer = postWasherAction(unloadedWasher);
         if (washer != null){
-            washers[selected_washer_index] = washer;
-            $(washer_ids[selected_washer_index]).empty();
-            $(washer_ids[selected_washer_index]).append(washer.makeCompactDiv());
-
-            // If the object is waiting to unload
-            if (washer.isLoad){
-                $(washer_ids[i]).prop("href","#unload_wash_popup");
-            } else {
-                $(washer_ids[i]).prop("href","#load_wash_popup");
-            }
+            refreshWashers();
+        } else {
+            console.log("TODO: Handle unload washer error")
         }
         $('#unload_wash_popup').popup('close');
     });
 
+    $("#refresh-wash-btn").click(function(e){
+        e.preventDefault();
+        refreshWashers();
+    });
 });
 
+function refreshWashers(){
+    updateAvailableColors();
+    for (var i = 0; i < NUM_WASHERS; i++) {
+
+        var washer;
+        // GET each washer json
+        $.ajax(url_base + "/machine.php/washer/" + (i+1) + "/",
+            {
+                type: "GET",
+                async: false,
+                dataType: "json",
+                success: function (washer_json, status, jqXHR) {
+                    washer = new Machine(washer_json);
+                },
+                error: function (jqXHR, status, error) {
+                    // This (hopefully means) that there hasn't been any action associated
+                    console.log("washer " + (i+1) + " faliure:" + jqXHR.responseText);
+                }
+            });
+
+        washers.push(washer);
+        // These attributes allow the link to present a popup
+        $(washer_ids[i]).empty();
+        $(washer_ids[i]).attr("data-rel","popup");
+        $(washer_ids[i]).attr("data-position-to","window");
+        $(washer_ids[i]).attr("data-transition","pop");
+
+        // This handler keeps track of which washer was clicked last
+        // used for determining who called the load/unload
+        $(washer_ids[i]).on('click', function (e) {
+            selected_washer_index = $(this).attr('id').slice(-1) - 1;
+        });
+
+        $(washer_ids[i]).append(washer.makeCompactDiv());
+        if (washer.isLoad){ // Last action was a load, expecting an unload
+            $(washer_ids[i]).prop("href","#unload_wash_popup");
+        } else {
+            $(washer_ids[i]).prop("href","#load_wash_popup");
+        }
+    }
+
+}
 /*
     Fills load dialog with assigned colors
  */
@@ -171,6 +165,7 @@ function lidForColorID(colorID){
 }
 
 function postWasherAction(machine){
+    var washer = null;
     $.ajax(url_base + "/machine.php/washer/",
         {
             type: "POST",
@@ -178,11 +173,10 @@ function postWasherAction(machine){
             data: machine,
             success: function(washer_json, status, jqXHR) {
                 console.log("Washer action completed.");
-                return new Machine(washer_json);
+                washer = new Machine(washer_json);
             },
             error: function(jqXHR, status, error) {
                 console.log("Failure posting washer action : " + jqXHR.responseText);
-                return null;
             }});
+    return washer;
 }
-
