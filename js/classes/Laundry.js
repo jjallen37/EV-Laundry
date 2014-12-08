@@ -6,11 +6,14 @@ var Laundry = function(laundry_json) {
     this.lid = laundry_json.lid;
     this.cid = laundry_json.cid;
     this.color = laundry_json.color;
+    this.sort = ""; // initialized below
+    this.fold = "";
 
     var url_base = "php";
 
-    var tmp1;
-    var tmp2;
+    var tmp1 = "";
+    var tmp2 = "";
+    var tmp3 = "";
 
     //// Grab customer data from REST
     //$.ajax(url_base + "/customers.php/" + this.cid + "/",
@@ -46,6 +49,26 @@ var Laundry = function(laundry_json) {
             }
         });
     this.sort = tmp2;
+
+    // Grab sort data from REST
+    json_str = '{ ' +
+        '"lid":' + this.lid + ',' +
+        '"isFold":' + 1 + '}';
+    obj = JSON.parse(json_str);
+    $.ajax(url_base + "/clothes.php/",
+        {
+            type: "GET",
+            async: false,
+            data: obj,
+            success: function(json, status, jqxhr) {
+                tmp3 = new Clothes(json);
+            },
+
+            error: function(jqxhr, status, error) {
+                console.log("failure3:"+jqxhr.responseText);
+            }
+        });
+    this.fold = tmp3;
 };
 
 Laundry.prototype.makeCompactLi = function() {

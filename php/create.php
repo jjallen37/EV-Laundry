@@ -97,7 +97,3 @@ try {
     exit();
 }
 ?>
-
-
-</body>
-</html>

@@ -3,11 +3,11 @@
  */
 
 var url_base = "../";
-$(document).on('pagecreate',function() {
-
+$(document).on('pagebeforeshow',function() {
+    $('#employees_ul').empty();
     // Fetch the employee list and async
     var text = "";
-    $.ajax(url_base + "/php/employees.php/",
+    $.ajax(url_base + "php/employees.php/",
         {type: "GET",
             async:false,
             dataType: "json",
@@ -26,6 +26,7 @@ $(document).on('pagecreate',function() {
             }});
     $('#employee_status').html(text);
 });
+
 
 function addEmployee(eid) {
     $.ajax(url_base + "php/employees.php/" + eid, {

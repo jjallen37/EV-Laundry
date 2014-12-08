@@ -36,7 +36,10 @@ $(document).ready(function() {
         }
     });
 
-    // Insert employee data from file
+});
+
+function loadCustomers(){
+    // Insert customer data from file
     var customer_div = $("#customers_result");
     $.ajax({
         async: false,
@@ -52,8 +55,8 @@ $(document).ready(function() {
             customer_div.html($('<p>Error Loading Customers Data</p>'));
         }
     });
-});
 
+}
 function processCustomers(data) {
     var record_num = 1;  // or however many elements there are in each row
     var customer_div = $("#customer_result");

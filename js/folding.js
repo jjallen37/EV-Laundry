@@ -9,6 +9,7 @@ $(document).ready(function() {
     var url_base = "php";
     var lid = 0;
     var eid = 1;
+    var colorID = -1;
 
     /*
      Load Color Data
@@ -38,25 +39,36 @@ $(document).ready(function() {
                 if (first != -1){
                     $('option[value='+first+']').attr('selected', 'selected');
                 } else {
+                    // No colors available, meaning there is no laundry being done right now
+                    // Prevent folding
                     var option = '<option value="'+(-1)+'">No Available Colors</option>';
                     $("#select-color-fold").append(option);
                     $('option[value='+(-1)+']').attr('selected', 'selected');
+                    $('#start_folding').addClass('ui-disabled');
                 }
                 // Redraw the select element
                 $("#select-color-fold").selectmenu('refresh');
-                return;
             },
             error: function(jqXHR, status, error) {
                 console.log("failure:"+jqXHR.responseText);
-                return;
             }});
 
 
     /*
         Handle submitting form
      */
-    $("input[type=submit]").click(function(e) {
-        e.preventDefault();
+    $('#folding-submit-btn').click(function(e) {
+        // Verify Job coach questions
+        var neatly_stacked = $('#neatly_stacked').prop('checked');
+        var inventory_accurate = $('#fold_inventory_accurate').prop('checked');
+        if (!neatly_stacked) {
+            alert("Error: All clothing must neatly stacked before submission.");
+            return;
+        }
+        if (!inventory_accurate) {
+            alert("Error: The clothing counts must be accurate before submission.");
+            return;
+        }
 
         // Collect form data
         var colorID = $("#select-color-fold").val();
@@ -123,7 +135,12 @@ $(document).ready(function() {
     });
 
     $("#start_folding").click(function(e) {
-        $("#header-fold").text("Folding - "+$("#slider-id-num").val());
+        var color_val = $("#select-color-fold").val();
+        if (color_val < 0) {
+            alert('There are no available colors to fold at this time')
+        }
+
+        console.log("color id:"+colorID);
     });
 });
 

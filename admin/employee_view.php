@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['eid'])) {
-    header("Location: http://wwwx.cs.unc.edu/Courses/comp426-f13/jamesml/site/index.html");
+    header("Location: ../admin.html");
     exit;
 }
 
@@ -13,8 +13,8 @@ if (!isset($_GET['eid'])) {
     <meta charset="UTF-8">
     <title>Employee View</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <!--<link rel="stylesheet" href="themes/Theme6.min.css"/>-->
-    <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
+    <link rel="stylesheet" href="../themes/Theme6.min.css"/>
+    <link rel="stylesheet" href="../themes/jquery.mobile.icons.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 </head>
@@ -26,7 +26,7 @@ if (!isset($_GET['eid'])) {
     <div data-role="header">
         <!-- Header -->
         <h1 id="employee_header"></h1>
-        <a href="employees_view.html" class="ui-btn ui-corner-all ui-shadow ui-icon-left ui-btn-icon-left">Employee List</a>
+        <a href="employee_list.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-left ui-btn-icon-left">Employee List</a>
     </div><!-- /header -->
 
     <!-- Main Page Content -->

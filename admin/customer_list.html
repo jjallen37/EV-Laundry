@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>EV Employees List</title>
+    <title>EV Customer List</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
     <!--<link rel="stylesheet" href="themes/Theme6.min.css"/>-->
     <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
@@ -10,19 +10,19 @@
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 </head>
 <body>
-<div data-role="page" id="employees_page">
-    <script src="../js/classes/Employee.js"></script>
-    <script src="employees_view.js"></script>
+<div data-role="page" id="customers_page">
+    <script src="../js/classes/Customer.js"></script>
+    <script src="customer_list.js"></script>
     <!-- Header -->
     <div data-role="header">
-        <h1>EV Employees</h1>
-        <a href="../admin.html" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Admin</a>
+        <h1>EV Customer List</h1>
+        <a href="../admin.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Admin</a>
     </div><!-- /header -->
 
     <!-- Main Page Content -->
     <div class="ui-content" role="main">
-        <div id="employee_status"></div>
-        <ul id="employees_ul" data-role="listview" data-inset="true">
+        <div id="customer_status"></div>
+        <ul id="customers_ul" data-role="listview" data-inset="true">
         </ul>
     </div>
 </div>
