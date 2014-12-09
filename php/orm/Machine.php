@@ -8,6 +8,10 @@
 
 ini_set('display_errors', 'On');
 
+/*
+ * Describes the values for Event.action
+ */
+
 class Machine
 {
     private $mid;

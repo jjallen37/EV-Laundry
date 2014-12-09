@@ -42,23 +42,6 @@ class Customer
         $this->name = $name;
     }
 
-    public static function getAllIDs() {
-        // Create (connect to) SQLite database in file
-        $db = new PDO('sqlite:../db/ev_db.db');
-        // Set errormode to exceptions
-        $db->setAttribute(PDO::ATTR_ERRMODE,
-            PDO::ERRMODE_EXCEPTION);
-
-        $result = $db->query('SELECT cid FROM Customers');
-        $id_array = array();
-
-        foreach ($result as $r){
-            $id_array[] = intval($r['cid']);
-        }
-
-        return $id_array;
-    }
-
     public static function findByID($cid) {
         // Create (connect to) SQLite database in file
         $db = new PDO('sqlite:../db/ev_db.db');
@@ -79,11 +62,42 @@ class Customer
         return null;
     }
 
+    public static function getAllIDs(){
+        return Customer::getIDQuery('SELECT cid FROM Customer
+                                      ORDER BY name');
+    }
+
+    public static function getActiveIDs(){
+        return Customer::getIDQuery('SELECT C.cid FROM Color C, Laundry L
+                                     WHERE L.cid = C.cid
+                                     AND L.status = "ACTIVE"');
+    }
+    public static function getFreeIDs(){
+        return Customer::getIDQuery("SELECT C.cid FROM Customers C
+                                      LEFT JOIN Laundry L
+                                      ON L.cid = C.cid
+                                      AND L.status = 'ACTIVE'
+                                      WHERE L.cid IS NULL");
+    }
+
+    private static function getIDQuery($query){
+        // Create (connect to) SQLite database in file
+        $db = new PDO('sqlite:../db/ev_db.db');
+        $db->setAttribute(PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION);
+        // Execute query for ids
+        $result = $db->query($query);
+        // Create id array
+        $id_array = array();
+        foreach ($result as $r) {
+            $id_array[] = intval($r['cid']);
+        }
+        return $id_array;
+    }
 
     public function getID() {
         return $this->cid;
     }
-
     public function getName() {
         return $this->name;
     }

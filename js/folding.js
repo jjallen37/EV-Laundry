@@ -1,5 +1,5 @@
 /**
- * sorting.js
+ * folding.js
  */
 
 $(document).ready(function() {
@@ -93,7 +93,7 @@ $(document).ready(function() {
         var obj = JSON.parse(json_str);
 
         var folding_json = null;
-        $.ajax(url_base + "/clothes.php/",
+        $.ajax(url_base + "/counts.php/",
             {type: "POST",
                 async: false,
                 dataType: "json",
@@ -108,7 +108,8 @@ $(document).ready(function() {
                 }});
 
         if (folding_json != null){
-            $.ajax(url_base + "/clothes.php/" + folding_json['lid'],
+
+            $.ajax(url_base + "/counts.php/" + folding_json['lid'],
                 {type: "GET",
                     async: false,
                     success: function(sort_json, status, jqXHR) {

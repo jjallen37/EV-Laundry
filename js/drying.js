@@ -70,7 +70,7 @@ function refreshDryers(){
     updateAvailableColors();
     for (var i = 0; i < NUM_DRYERS; i++) {
         var dryer;
-        $.ajax(url_base + "/machine.php/dryer/" + (i+1),
+        $.ajax(url_base + "/events.php/dryer/" + (i+1),
             {
                 type: "GET",
                 async: false,
@@ -166,7 +166,7 @@ function lidForColorID(colorID){
 
 function postDryerAction(machine){
     var dryer = null;
-    $.ajax(url_base + "/machine.php/",
+    $.ajax(url_base + "/events.php/",
         {
             type: "POST",
             async: false,
