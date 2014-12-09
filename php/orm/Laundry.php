@@ -107,7 +107,8 @@ class Laundry
     public function getStatus() {
         return $this->status;
     }
-    public function setStatus() {
+    public function setStatus($status) {
+        $this->status = $status;
         // Create (connect to) SQLite database in file
         $db = new PDO('sqlite:../db/ev_db.db');
         // Set errormode to exceptions
@@ -120,8 +121,8 @@ class Laundry
                     WHERE lid = :lid";
         $stmt = $db->prepare($update);
         // Bind parameters to statement variables
-        $stmt->bindParam(':lid', $this->lid);
         $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':lid', $this->lid);
         // Execute statement
         $stmt->execute();
     }

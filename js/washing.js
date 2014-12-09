@@ -66,7 +66,6 @@ $(document).on('pagecreate',function() {
 function refreshWashers(){
     updateAvailableColors();
     for (var i = 0; i < NUM_WASHERS; i++) {
-
         var washer;
         // GET each washer json
         $.ajax(url_base + "/events.php/washer/" + (i+1) + "/",
@@ -74,15 +73,20 @@ function refreshWashers(){
                 type: "GET",
                 async: false,
                 dataType: "json",
-                success: function (washer_json, status, jqXHR) {
-                    washer = new Machine(washer_json);
+                success: function (washerID, status, jqXHR) {
+                    if (washerID < 1){
+                        var wash = new Event(null);
+                        wash.event_action = Event.ActionEnum.UNLOAD_WASH;
+                        washer = wash;
+                    } else {
+                        washer = findEventByID(washerID);
+                    }
                 },
                 error: function (jqXHR, status, error) {
                     // This (hopefully means) that there hasn't been any action associated
                     console.log("washer " + (i+1) + " faliure:" + jqXHR.responseText);
                 }
             });
-
         washers.push(washer);
         // These attributes allow the link to present a popup
         $(washer_ids[i]).empty();
@@ -103,49 +107,36 @@ function refreshWashers(){
             $(washer_ids[i]).prop("href","#load_wash_popup");
         }
     }
-
 }
 /*
     Fills load dialog with assigned colors
  */
 function updateAvailableColors(){
-    $("#select-color-wload").empty();
-    $.ajax(url_base + "/color.php/",
+    var select_color = $("#select-color-wload");
+    select_color.empty();
+    $.ajax(url_base + "/color.php/active/",
         {
             type: "GET",
             async: false,
-            success: function(color_json, status, jqXHR) {
-                var colors = color_json['colors'];
-                var lids = color_json['lids'];
-                var first = -1;
-
-                // Obtain all assigned colors
-                for (var i=0; i < colors.length; i++){
-                    // Assigned Colors
-                    if (lids[i] > 0){
-                        var option = '<option value="'+(i+1)+'">'+colors[i]+'</option>';
-                        $("#select-color-wload").append(option);
-                        if (first == -1){
-                            first = i+1;
-                        }
-                    }
-                }
-
-                // Select first option by default
-                if (first != -1){
-                    $('option[value='+first+']').attr('selected', 'selected');
+            success: function(color_ids, status, jqXHR) {
+                // No available colors
+                if (color_ids.length == 0){
+                    var option = $('<option value="'+(-1)+'">No available colors.</option>');
+                    option.attr('selected', 'selected');
+                    select_color.append(option);
+                    select_color.selectmenu('refresh');
+                    $('#load-washer-submit-btn').addClass('ui-disabled');
                 } else {
-                    var option = '<option value="'+(-1)+'">No available options</option>';
-                    $("#select-color-wload").append(option);
-                    $('option[value='+(-1)+']').attr('selected', 'selected');
+                    // Create select option for each color
+                    $.each(color_ids, function (i, color_id) {
+                        var color = findColorByID(color_id);
+                        select_color.append(color.makeSelectOption());
+                        select_color.selectmenu('refresh');
+                    });
                 }
-                // Redraw the select element
-                $("#select-color-wload").selectmenu('refresh');
-                return;
             },
             error: function(jqXHR, status, error) {
-                console.log("failure fetching colors:"+jqXHR.responseText);
-                return;
+                console.log("Error fetching available colors:"+jqXHR.responseText);
             }});
 }
 

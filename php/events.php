@@ -55,7 +55,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     $timestamp = intval($_REQUEST['timestamp']);
 
-    // TODO Verify action validity
+    $event = Event::create($lid, $eid, $id, $event_action,$timestamp);
+    // Report if failed
+    if ($event == null) {
+        header("HTTP/1.0 500 Server Error");
+        print("Server couldn't create event.");
+        exit();
+    }
+
+    //Generate JSON encoding of new Review
+    header("Content-type: application/json");
+    print($event->getJSON());
+    exit();
+
 //    // Verify that this is a legal operation
 //    $currentMachine = Machine::getMachine($isDryer, $num);
 //
@@ -79,20 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 //            exit();
 //    }
 
-    // Create new Review via ORM
-    $event = Event::create($lid, $eid, $id, $event_action,$timestamp);
-
-    // Report if failed
-    if ($event == null) {
-        header("HTTP/1.0 500 Server Error");
-        print("Server couldn't create event.");
-        exit();
-    }
-
-    //Generate JSON encoding of new Review
-    header("Content-type: application/json");
-    print($event->getJSON());
-    exit();
 } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // GET events.php/
     // Return all event ids
@@ -101,6 +99,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         header("Content-type: application/json");
         print(json_encode(Event::getAllIDs()));
         exit();
+    }
+
+    // Get washer and dryer status
+    if ($path_components[1] == "washer" && count($path_components) >= 3){
+        $num = intval($path_components[2]);
+        $event_id = Event::getWasher($num);
+        header("Content-type: application/json");
+        print(json_encode($event_id));
+        exit();
+    } else if ($path_components[1] == "dryer" && count($path_components) >= 3){
+//        $num = intval($path_components[2]);
+//        $event_id = Event::getWasher($num);
+//        header("Content-type: application/json");
+//        print(json_encode(Event::getWasher()));
+//        exit();
     }
 
     // events.php/<id>

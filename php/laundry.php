@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         print("Missing laundry status");
         exit();
     }
-    $status = intval($_REQUEST['status']);
+    $status = $_REQUEST['status'];
 
     // POST /laundry.php/laundry
     if (count($path_components) < 2 || $path_components[1] == "") {

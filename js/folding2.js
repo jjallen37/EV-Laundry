@@ -1,5 +1,5 @@
 /**
- * sorting.js
+ * folding.js
  */
 
 var url_base = "php";
@@ -13,9 +13,9 @@ $(document).ready(function() {
     loadColorMenu();
 
     /*
-     Transition to sorting screen is done in html
+     Transition to folding screen is done in html
      */
-    //$("#start_sorting").click(function(e) {
+    //$("#start_folding").click(function(e) {
 
     /*
      When the user submits the counts
@@ -109,7 +109,7 @@ function loadColorMenu(){
                     option.attr('selected', 'selected');
                     select_color.append(option);
                     select_color.selectmenu('refresh');
-                    $('#start_sorting').addClass('ui-disabled');
+                    $('#start_folding').addClass('ui-disabled');
                 } else {
                     // Create select option for each color
                     $.each(color_ids, function (i, color_id) {

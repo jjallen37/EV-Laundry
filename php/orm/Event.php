@@ -103,6 +103,20 @@ class Event
                                   ORDER BY timestamp', array($lid));
     }
 
+    public static function getWasher($num){
+        $washer = Event::getIDQuery('SELECT event_id FROM Events
+                                  WHERE event_action == 1
+                                    OR event_action == 2
+                                    AND id = ?
+                                  ORDER BY timestamp DESC
+                                  LIMIT 1', array($num));
+        if (count($washer) < 1){
+            return 0;
+        } else {
+            return $washer[0];
+        }
+    }
+
     private static function getIDQuery($query, $params){
         // Create (connect to) SQLite database in file
         $db = new PDO('sqlite:../db/ev_db.db');
@@ -118,6 +132,7 @@ class Event
         }
         return $id_array;
     }
+
     /*
      * Input: Washer or Dryer number
      * Output: PHP object representing most recent operation on machine
