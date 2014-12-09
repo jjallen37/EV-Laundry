@@ -13,8 +13,8 @@ if (!isset($_GET['lid'])) {
     <meta charset="UTF-8">
     <title>Laundry View</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <!--<link rel="stylesheet" href="themes/Theme6.min.css"/>-->
-    <!--<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />-->
+    <link rel="stylesheet" href="themes/theme6.min.css"/>
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 </head>

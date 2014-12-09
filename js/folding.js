@@ -108,7 +108,6 @@ $(document).ready(function() {
                 }});
 
         if (folding_json != null){
-
             $.ajax(url_base + "/clothes.php/" + folding_json['lid'],
                 {type: "GET",
                     async: false,
