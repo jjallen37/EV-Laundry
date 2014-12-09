@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <title>EV Admin Page</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <link rel="stylesheet" href="themes/Theme6.min.css"/>
+    <link rel="stylesheet" href="themes/theme6.min.css"/>
     <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-    <script src="js/admin.js"></script>
 </head>
 <body>
-<ul data-role="admin_list" data-inset="true">
-        <li><a href="laundry_list.html">Laundry List</a></li>
-        <li><a href="employees_view.html">Employees</a></li>
-        <li><a href="cusomters_view.html">Customers</a></li>
-        <li><a href="colors_view.html">Colors</a></li>
-        <li><a href="create.html">Reset Data</a></li>
-</ul>
+<div data-role="page" id="admin_page">
+    <script src="admin/admin.js"></script>
+    <!-- Header -->
+    <div data-role="header">
+        <h1>EV Admin Page2</h1>
+    </div><!-- /header -->
+
+    <!-- Main Page Content -->
+    <div class="ui-content" role="main">
+        <ul id="admin_list" data-role="listview" data-inset="true">
+            <li><a data-ajax="false" href="admin/laundry_list.html">Laundry List</a></li>
+            <li><a data-ajax="false" href="admin/employee_list.html">Employees</a></li>
+            <li><a data-ajax="false" href="admin/customer_list.html">Customers</a></li>
+            <li><a data-ajax="false" href="admin/create.html">Reset Data</a></li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>

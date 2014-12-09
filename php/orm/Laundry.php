@@ -79,9 +79,10 @@ class Laundry
             PDO::ERRMODE_EXCEPTION);
 
         $result = $db->query('SELECT lid FROM Laundry');
+//                              ORDER BY startTime');
         $id_array = array();
         foreach ($result as $r){
-            $id_array[] = intval($r['cid']);
+            $id_array[] = intval($r['lid']);
         }
         return $id_array;
     }
