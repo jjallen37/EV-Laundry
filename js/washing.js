@@ -69,7 +69,7 @@ function refreshWashers(){
 
         var washer;
         // GET each washer json
-        $.ajax(url_base + "/machine.php/washer/" + (i+1) + "/",
+        $.ajax(url_base + "/events.php/washer/" + (i+1) + "/",
             {
                 type: "GET",
                 async: false,
@@ -166,7 +166,7 @@ function lidForColorID(colorID){
 
 function postWasherAction(machine){
     var washer = null;
-    $.ajax(url_base + "/machine.php/washer/",
+    $.ajax(url_base + "/events.php/washer/",
         {
             type: "POST",
             async: false,

@@ -22,7 +22,7 @@ if (!isset($_GET['lid'])) {
 <div data-role="page" id="laundry_page">
     <script src="../js/classes/Employee.js"></script>
     <script src="../js/classes/Customer.js"></script>
-    <script src="../js/classes/Clothes.js"></script>
+    <script src="../js/classes/Count.js"></script>
     <script src="../js/classes/Laundry.js"></script>
     <script src="laundry_view.js"></script>
     <!-- Header -->

@@ -16,3 +16,25 @@ Customer.prototype.makeCompactLi = function() {
         'text': this.name
     }));
 };
+
+Customer.prototype.makeSelectOption = function() {
+    return '<option value="'+this.cid+'">'+this.name+'</option>';
+};
+
+function findCustomerByID(id){
+    var url_base = "php";
+    var customer = null;
+    $.ajax(url_base + "/customers.php/" + id,
+        {
+            type: "GET",
+            async: false,
+            success: function(customer_json, status, jqXHR) {
+                customer = new Customer(customer_json);
+            },
+            error: function(jqXHR, status, error) {
+                console.log("Error fetching available customer id:"+id+
+                "..."+jqXHR.responseText);
+            }});
+    return customer;
+};
+

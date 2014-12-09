@@ -16,7 +16,7 @@ $(document).ready(function() {
                 $("#other_result").html($('<p>Database Created</p>'));
             },
             error: function (jqXHR, status, error) {
-                $("#other_result").html($('<p>Error Creating Databases</p>'));
+                $("#other_result").html($('<p>Error Creating Databases:'+jqXHR.responseText+'</p>'));
             }
         });
 
@@ -36,9 +36,6 @@ $(document).ready(function() {
         }
     });
 
-});
-
-function loadCustomers(){
     // Insert customer data from file
     var customer_div = $("#customers_result");
     $.ajax({
@@ -55,8 +52,8 @@ function loadCustomers(){
             customer_div.html($('<p>Error Loading Customers Data</p>'));
         }
     });
+});
 
-}
 function processCustomers(data) {
     var record_num = 1;  // or however many elements there are in each row
     var customer_div = $("#customer_result");
