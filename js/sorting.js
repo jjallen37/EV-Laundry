@@ -8,20 +8,14 @@ $(document).ready(function() {
     var time_finished;
     var lid = -1;
     var colorID = -1;
-    var eid = -1; //TEMP
+    var eid = 2; //TEMP
     var url_base = "php";
-    if(typeof(Storage) !== "undefined") {
-        if (sessionStorage.eid) {
-            eid = sessionStorage.eid;
-        }
-    }
 
     /*
         Fetch available colors and customers
         An available color is one without an associated lid,
         as in it is not currently assigned to another laundry.
      */
-    var active_lids = [];
     $.ajax(url_base + "/color.php/",
         {
             type: "GET",
@@ -32,17 +26,14 @@ $(document).ready(function() {
                 var first = -1;
 
                 // Fill color chooser with available colors
-                var select_color = $("#select-color-sort");
                 for (var i=0; i < colors.length; i++){
                     // Unassigned color
                     if (lids[i] <= 0){
                         var option = '<option value="'+(i+1)+'">'+colors[i]+'</option>';
-                        select_color.append(option);
+                        $("#select-color-sort").append(option);
                         if (first == -1){
                             first = i+1;
                         }
-                    } else {
-                        active_lids.push(lids[i]);
                     }
                 }
 
@@ -51,52 +42,17 @@ $(document).ready(function() {
                     $('option[value='+first+']').attr('selected', 'selected');
                 } else {
                     var option = '<option value="'+(-1)+'">No available options</option>';
-                    select_color.append(option);
+                    $("#select-color-sort").append(option);
                     $('option[value='+(-1)+']').attr('selected', 'selected');
                     $('#start_sorting').addClass('ui-disabled');
                 }
                 // Redraw the select element
-                select_color.selectmenu('refresh');
+                $("#select-color-sort").selectmenu('refresh');
+                return;
             },
             error: function(jqXHR, status, error) {
                 console.log("Error fetching available colors:"+jqXHR.responseText);
             }});
-
-    // Populate Customer list
-    var tmp_json = '{'+
-            '"hasLaundry" : 1}';
-    var get_customer_json = JSON.parse(tmp_json);
-    var select_customer = $("#select-customer-name");
-    $.ajax(url_base + "/customers.php/",
-        {
-            type: "GET",
-            async: false,
-            data: tmp_json,
-            success: function(cids, status, jqXHR) {
-                $.each(cids, function (i, cid){
-                    addCustomerDiv(cid, active_lids);
-                });
-            },
-            error: function(jqXHR, status, error) {
-                console.log("Error fetching customer ids:"+jqXHR.responseText);
-            }});
-
-    function addCustomerDiv(cid, active_lids) {
-        // Returns
-        $.ajax(url_base + "/customers.php/" + cid,
-            {
-                type: "GET",
-                success: function (customer_json, status, jqXHR) {
-                    var customer = new Customer(customer_json);
-                    var option = '<option value="' + customer.cid + '">' + customer.name + '</option>';
-                    select_customer.append(option);
-                    select_customer.selectmenu('refresh');
-                },
-                error: function (jqXHR, status, error) {
-                    console.log("Error fetching customer :" + cid + "..." + jqXHR.responseText);
-                }
-            });
-    }
 
     /*
          Present clothe counting screen
@@ -170,7 +126,7 @@ $(document).ready(function() {
         var obj = JSON.parse(json_str);
 
         console.log("Clothes request");
-        $.ajax(url_base + "/counts.php/",
+        $.ajax(url_base + "/clothes.php/",
             {type: "POST",
                 async: false,
                 dataType: "json",
