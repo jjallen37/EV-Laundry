@@ -11,10 +11,9 @@ ini_set('display_errors', 'On');
 class Customer
 {
     private $cid;
-    private $firstName;
-    private $lastName;
+    private $name;
 
-    public static function create($firstName, $lastName) {
+    public static function create($name) {
         // Create (connect to) SQLite database in file
         $db = new PDO('sqlite:../db/ev_db.db');
         // Set errormode to exceptions
@@ -22,27 +21,25 @@ class Customer
             PDO::ERRMODE_EXCEPTION);
 
         // Prepare INSERT statement to SQLite3 file db
-        $insert = "INSERT INTO Customers (firstName, lastName)
-                    VALUES (:firstName, :lastName)";
+        $insert = "INSERT INTO Customers (name)
+                    VALUES (:name)";
         $stmt = $db->prepare($insert);
         // Bind parameters to statement variables
-        $stmt->bindParam(':firstName', $firstName);
-        $stmt->bindParam(':lastName', $lastName);
+        $stmt->bindParam(':name', $name);
 
         // Execute statement
         $stmt->execute();
         $new_id = $db->lastInsertId();
 
         if ($new_id > 0) {
-            return new Customer($new_id, $firstName, $lastName);
+            return new Customer($new_id, $name);
         }
         return null;
     }
 
-    private function __construct($cid, $firstName, $lastName) {
+    private function __construct($cid, $name) {
         $this->cid = $cid;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->name = $name;
     }
 
     public static function getAllIDs() {
@@ -76,8 +73,7 @@ class Customer
         $row = $stmt->fetch();
         if (!empty($row)){
             $customer = new Customer($row['cid'],
-                                    $row['firstName'],
-                                    $row['lastName']);
+                $row['name']);
             return $customer;
         }
         return null;
@@ -87,18 +83,14 @@ class Customer
     public function getID() {
         return $this->cid;
     }
-    public function getFirstName() {
-        return $this->firstName;
-    }
-    public function getLastName() {
-        return $this->lastName;
+
+    public function getName() {
+        return $this->name;
     }
 
     public function getJSON() {
         $json_rep = array();
         $json_rep['cid'] = $this->cid;
-        $json_rep['firstName'] = $this->firstName;
-        $json_rep['lastName'] = $this->lastName;
-        $json_rep['name'] = $this->firstName . ' ' . $this->lastName;
+        $json_rep['name'] = $this->name;
         return json_encode($json_rep, JSON_NUMERIC_CHECK);
     }}

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             exit();
         }
 
-        // Create new Review via ORM
+        // Create new Laundry via ORM
         $laundry = Laundry::create($cid, $color);
 
         // Report if failed
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Lock color until folding
         Color::setColor($color, $laundry->getID());
 
-        //Generate JSON encoding of new Review
+        //Generate JSON encoding of new Laundry
         header("Content-type: application/json");
         print($laundry->getJSON());
         exit();
@@ -69,19 +69,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // GET to /laundry.php/<id>
-    // Return laundry with all components
+    // Return specific laundry
     if (count($path_components) >= 2 && $path_components[1] != "") {
         $lid = intval($path_components[1]);
         $laundry = Laundry::findByID($lid);
 
-        //Generate JSON encoding of new Review
+        //Generate JSON encoding of new Laundry
         header("Content-type: application/json");
         print($laundry->getJSON());
         exit();
+    } else {
+        //Generate JSON encoding of all laundry ids
+        header("Content-type: application/json");
+        print(json_encode(Laundry::getAllIDs()));
+        exit();
     }
-    header("HTTP/1.0 404 Not Found");
-    print("We do not support laundry.php/<id> posts right now");
-    exit();
 }
 
 // If here, none of the above applied and URL could

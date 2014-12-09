@@ -5,7 +5,7 @@
       <paths name="EV_XAMPP">
         <serverdata>
           <mappings>
-            <mapping deploy="EV/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/EV/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
